@@ -1,0 +1,104 @@
+<page-header title="{{item ? kindLabel : '内容详情'}}" subtitle="百草源" back="{{true}}" />
+<view wx:if="{{item}}" class="detail-page ui-page {{uiPhase}}">
+  <view class="page-shell detail-heading">
+    <view class="detail-breadcrumb"><button class="breadcrumb-button" bindtap="backToLibrary" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">探索本草</button><text class="breadcrumb-divider">/</text><text>{{kindLabel}}</text></view>
+    <view class="detail-topline"><text class="eyebrow">{{item.category}}</text><text wx:if="{{item.kind === 'course'}}" class="free-tag">免费文本课程</text></view>
+    <text class="detail-title serif">{{item.title}}</text>
+    <text class="detail-subtitle">{{item.subtitle}}</text>
+    <text class="detail-description muted">{{item.description}}</text>
+    <view class="detail-actions">
+      <text class="reading-meta">{{item.kind === 'course' ? chapters.length + ' 节 · 约 ' + item.minutes + ' 分钟' : kindLabel + ' · 可收藏'}}</text>
+      <button size="mini" class="favorite-button {{favorite ? 'favorite-button-active' : ''}}" bindtap="toggleFavorite" aria-label="{{favorite ? '取消收藏' : '收藏内容'}}" aria-pressed="{{favorite}}" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><app-icon name="heart" size="{{18}}" color="{{favorite ? '#244b3b' : '#68766a'}}" /><text>{{favorite ? '已收藏' : '收藏'}}</text></button>
+    </view>
+  </view>
+
+  <view wx:if="{{item.archive}}" class="archive-bookplate">
+    <view class="archive-bookplate-line"><app-icon name="book" size="{{25}}" color="#526553" /><text class="archive-bookplate-title serif">本草纲目</text></view>
+    <text class="archive-bookplate-subtitle">四库全书本 · {{item.archive.department}} · 卷{{item.archive.volume}}</text>
+    <text class="archive-bookplate-foot">李时珍著 · 古籍文化档案</text>
+  </view>
+  <view wx:elif="{{item.kind !== 'course'}}" class="detail-image-block">
+    <image wx:if="{{!imageFailed}}" class="detail-image" src="{{imageSrc}}" mode="aspectFill" binderror="imageError" aria-label="{{item.title}}的本草主题配图" />
+    <view wx:else class="detail-image detail-image-placeholder"><app-icon name="leaf" size="{{40}}" color="#68766a" /><text>本草观察配图暂未加载</text></view>
+    <view class="image-caption page-shell"><view class="caption-line"></view><text>{{item.category + ' · ' + (item.kind === 'herb' ? item.title : '草木与生活')}}</text></view>
+  </view>
+
+  <view class="page-shell detail-content">
+    <block wx:if="{{item.kind === 'course'}}">
+      <view class="course-overview">
+        <view class="section-heading"><text class="serif section-title">课程目录</text><text class="course-count">{{progress.count}} / {{progress.total}} 已完成</text></view>
+        <view class="progress-track"><view class="progress-value" style="width: {{progress.percent}}%;"></view></view>
+        <view wx:if="{{progress.finished}}" class="course-finished"><app-icon name="check" size="{{17}}" color="#244b3b" /><text>已完成本课，随时回来温习。</text></view>
+        <view class="chapter-list">
+          <button wx:for="{{chapters}}" wx:key="id" class="chapter-row {{activeChapterId === item.id ? 'chapter-row-active' : ''}}" data-id="{{item.id}}" bindtap="chooseChapter" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">
+            <text class="chapter-number">{{item.numberLabel}}</text>
+            <text class="chapter-title">{{item.title}}</text>
+            <view class="chapter-status {{item.completed ? 'chapter-status-done' : ''}}"><app-icon wx:if="{{item.completed}}" name="check" size="{{16}}" color="#244b3b" /><app-icon wx:else name="arrow" size="{{16}}" color="#7b887a" /></view>
+          </button>
+        </view>
+        <button class="primary-button start-learning" bindtap="startLearning" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><app-icon name="book" size="{{19}}" color="#ffffff" /><text>{{learningButton}}</text></button>
+        <text class="course-footnote muted">无需登录 · 学习进度保存在当前设备</text>
+        <button class="secondary-button course-quiz" bindtap="openQuiz" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">五题挑战 · 检验所学</button>
+      </view>
+      <view class="learning-goals"><text class="section-title serif">学习目标与准备</text><text wx:for="{{item.objectives}}" wx:key="index" class="goal-line">{{index + 1}}. {{item}}</text><text class="materials-label">{{item.difficulty}} · 准备材料</text><text class="materials-line" wx:for="{{item.materials}}" wx:key="index">· {{item}}</text></view>
+
+      <view wx:if="{{activeChapter}}" id="chapter-reader" class="chapter-reader">
+        <view class="reader-topline"><text class="eyebrow">第 {{activeChapterNumber}} / {{chapters.length}} 节</text><text wx:if="{{activeCompleted}}" class="reader-completed">已完成</text></view>
+        <text class="reader-title serif">{{activeChapter.title}}</text>
+        <text wx:if="{{activeChapter.goal}}" class="chapter-goal">本节目标：{{activeChapter.goal}}</text>
+        <view class="article-text"><text wx:for="{{activeParagraphs}}" wx:key="index" class="article-paragraph" selectable="{{true}}">{{item}}</text></view>
+        <view wx:if="{{activeChapter.practice}}" class="chapter-practice"><text class="practice-title">动手练习</text><text class="practice-description" selectable="{{true}}">{{activeChapter.practice}}</text><text class="practice-title checklist-heading">完成前自查</text><text wx:for="{{activeChapter.checklist}}" wx:key="index" class="checklist-line">· {{item}}</text><button class="secondary-button practice-note" bindtap="practiceNote" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">用本节练习写笔记</button></view>
+        <button wx:if="{{!activeCompleted}}" class="primary-button complete-button" bindtap="completeActiveChapter" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><app-icon name="check" size="{{18}}" color="#ffffff" /><text>{{completionButton}}</text></button>
+        <button wx:else class="secondary-button complete-button" bindtap="nextChapter" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">{{nextButton}}</button>
+      </view>
+    </block>
+
+    <block wx:elif="{{item.archive}}">
+      <view class="archive-info">
+        <view class="archive-info-row"><text class="archive-info-label">原书名称</text><text class="archive-info-value" selectable="{{true}}">{{item.archive.originalTitle}}</text></view>
+        <view class="archive-info-row"><text class="archive-info-label">部类 / 卷次</text><text class="archive-info-value">{{item.archive.department}} · {{item.archive.category}} · 卷{{item.archive.volume}}</text></view>
+        <view class="archive-info-row"><text class="archive-info-label">收录类型</text><text class="archive-info-value">{{item.archive.entryType === 'unapplied' ? '有名未用' : item.archive.entryType === 'supplement' ? '原书附录' : '目录正条'}}</text></view>
+        <view wx:if="{{aliasLabel}}" class="archive-info-row"><text class="archive-info-label">关联名称</text><text class="archive-info-value">{{aliasLabel}}</text></view>
+      </view>
+      <view class="archive-reading-note">以下为古籍原文校录，保留历史观点、异体字与方剂记载，用于文化阅读与文献查阅。内容不作为现代诊疗、配药或采食依据。</view>
+      <view wx:if="{{archiveLoading}}" class="archive-reading-note">正在加载原文资料…</view>
+      <view wx:elif="{{archiveError}}"><text class="archive-reading-note">{{archiveError}}</text><view class="archive-recovery-actions"><button class="primary-button" bindtap="retryArchive" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">重新加载</button><button class="secondary-button" bindtap="backToLibrary" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">查看其他档案</button></view></view>
+      <view wx:else id="archive-reader" class="archive-reader">
+        <text class="eyebrow">{{archiveWholeVolume ? '本卷完整原文（含目录）' : '本条原文'}}</text>
+        <picker range="{{sectionTitles}}" value="{{sectionIndex}}" bindchange="chooseSection"><view class="archive-section-picker pressable" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">{{sectionTitles[sectionIndex]}} <text>⌄</text></view></picker>
+        <text class="archive-section-title serif">{{sectionTitle}}</text>
+        <view class="article-text"><text wx:for="{{sectionParagraphs}}" wx:key="index" class="article-paragraph" selectable="{{true}}">{{item}}</text></view>
+        <view class="archive-reader-nav"><button class="secondary-button" disabled="{{sectionIndex === 0}}" bindtap="previousSection" hover-class="{{sectionIndex === 0 ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100">上一段</button><text>{{sectionIndex + 1}} / {{sectionTitles.length}}</text><button class="secondary-button" disabled="{{sectionIndex + 1 >= sectionTitles.length}}" bindtap="nextSection" hover-class="{{sectionIndex + 1 >= sectionTitles.length ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100">下一段</button></view>
+      </view>
+      <button wx:if="{{!archiveWholeVolume}}" class="archive-related-link" bindtap="readVolume" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><text>阅读本卷完整原文（含附属药物）</text><app-icon name="arrow" size="{{18}}" /></button>
+      <button wx:else class="archive-related-link" bindtap="readEntry" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><text>返回本条档案</text><app-icon name="arrow" size="{{18}}" /></button>
+      <view class="archive-source"><text class="archive-source-title">{{item.archive.sourceLabel}} · 四库全书本 · 修订 {{item.archive.revisionId}}</text><text class="archive-source-url" selectable="{{true}}">{{item.archive.license}}</text><button class="secondary-button archive-copy-source" bindtap="copyArchiveSource" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">复制原文出处链接 ↗</button></view>
+    </block>
+    <block wx:else>
+      <view wx:if="{{item.kind === 'herb'}}" class="herb-info">
+        <view class="herb-info-row"><text class="herb-info-label">观察对象</text><text class="herb-info-value">{{item.title}}</text></view>
+        <view class="herb-info-row"><text class="herb-info-label">观察部位</text><text class="herb-info-value">{{item.category}}</text></view>
+        <view class="herb-info-row"><text class="herb-info-label">档案类型</text><text class="herb-info-value">{{item.subtitle}}</text></view>
+      </view>
+      <view class="article-heading"><text class="article-title serif">{{item.kind === 'herb' ? '观察与记录' : item.kind === 'route' ? '文化探索' : '精选笔记'}}</text></view>
+      <view class="article-text"><text wx:for="{{bodyParagraphs}}" wx:key="index" class="article-paragraph" selectable="{{true}}">{{item}}</text></view>
+    </block>
+
+    <view wx:if="{{item.noteTemplate}}" class="learning-template"><text class="section-title serif">观察笔记模板</text><text class="template-copy" selectable>{{item.noteTemplate}}</text><button class="secondary-button" bindtap="useTemplate" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">使用模板写笔记</button><text class="template-hint">默认私密，填写实际发现后可选择公开。</text></view>
+    <view wx:if="{{relatedItems.length}}" class="related-learning"><text class="section-title serif">相关内容</text><button wx:for="{{relatedItems}}" wx:key="id" class="related-learning-row" data-kind="{{item.kind}}" data-id="{{item.id}}" bindtap="openRelatedItem" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><view><text class="related-category">{{item.category}}</text><text>{{item.title}}</text></view><app-icon name="arrow" size="{{17}}"/></button></view>
+    <view wx:if="{{item.references.length}}" class="learning-sources"><text class="section-title serif">延伸阅读与参考</text><button wx:for="{{item.references}}" wx:key="url" class="source-row" data-index="{{index}}" bindtap="copyReference" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">{{item.title}} · 复制链接 ↗</button></view>
+    <view class="note-prompt">
+      <view class="note-prompt-top"><view class="note-icon"><app-icon name="pen" size="{{23}}" color="#244b3b" /></view><text class="note-prompt-title serif">记录这次发现</text></view>
+      <text class="note-prompt-description muted">写下新发现与待确认的问题，也可以看看相关笔记。</text>
+      <view class="related-notes-links">
+        <button class="related-notes-button" bindtap="openPublicNotes" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><text>{{demoMode ? '相关演示公共笔记' : localEdition ? '相关精选笔记' : '相关公共笔记'}}</text><text>{{localEdition && !demoMode ? '查看学习范例 ↗' : notesCountLoading ? '加载中…' : publicNotesError ? '点击查看' : publicRelatedCount + ' 篇 ↗'}}</text></button>
+        <button class="related-notes-button" bindtap="openMyNotes" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><text>{{demoMode ? '我的相关演示笔记' : localEdition ? '相关本机手记' : '我的相关笔记'}}</text><text>{{notesCountLoading ? '加载中…' : myNotesError ? '点击查看' : myRelatedCount + ' 篇 ↗'}}</text></button>
+      </view>
+      <button class="note-write-button" bindtap="writeNote" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><text>写一篇观察笔记</text><app-icon name="arrow" size="{{19}}" color="#244b3b" /></button>
+    </view>
+    <view class="detail-footer"><button class="share-button" open-type="share" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">分享这份内容 <app-icon name="arrow" size="{{15}}" color="#68766a" /></button></view>
+  </view>
+</view>
+<view wx:else class="page-shell detail-missing ui-page {{uiPhase}}">
+  <view class="empty-state"><view class="missing-icon"><app-icon name="leaf" size="{{32}}" color="#68766a" /></view><text class="missing-title serif">这份内容暂时找不到</text><text class="missing-description muted">回到探索本草，继续寻找你的下一份草木记录。</text><button class="primary-button" bindtap="backToLibrary" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">返回探索本草</button></view>
+</view>

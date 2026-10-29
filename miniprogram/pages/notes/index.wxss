@@ -1,0 +1,53 @@
+.notes-page { padding-top: 32rpx; }
+.notes-intro { display: flex; align-items: center; justify-content: space-between; gap: 20rpx; }
+.notes-intro > view { flex: 1; min-width: 0; }
+.notes-intro .eyebrow { color: #68766a; letter-spacing: 0; }
+.notes-heading { display: block; font-size: 38rpx; color: #263b30; line-height: 1.4; margin-top: 8rpx; font-weight: 600; font-family: inherit; }
+.new-note { flex-shrink: 0; display: flex; align-items: center; gap: 9rpx; padding: 16rpx 22rpx; border-radius: 10rpx; background: #244b3b; border: 0; color: #fff; font-size: 25rpx; min-height: 76rpx; }
+.storage-strip { display: flex; align-items: flex-start; gap: 10rpx; font-size: 21rpx; color: #68766a; padding: 18rpx 0 24rpx; }
+.storage-dot { flex-shrink: 0; width: 10rpx; height: 10rpx; background: #35624c; border-radius: 50%; margin-top: 12rpx; }
+.tabs-scroll { white-space: nowrap; width: 100%; margin-bottom: 24rpx; }
+.notes-tabs { display: inline-flex; gap: 30rpx; padding-bottom: 0; min-width: 100%; border-bottom: 1rpx solid #e3e7e1; }
+.notes-tab { flex-shrink: 0; font-size: 26rpx; padding: 18rpx 2rpx; background: transparent; border: 0; border-radius: 0; color: #68766a; min-height: 84rpx; border-bottom: 4rpx solid transparent; }
+.notes-tab.selected { color: #244b3b; background: transparent; border-color: #244b3b; font-weight: 600; }
+.note-search { height: 86rpx; width: 0; padding: 0; background: transparent; border-radius: 0; border: 0; font-size: 25rpx; color: #263b30; margin-bottom: 0; flex: 1; min-width: 0; }
+.related-filter { display: flex; justify-content: space-between; align-items: center; gap: 18rpx; background: #edf1eb; border: 1rpx solid #e3e7e1; padding: 16rpx 20rpx; border-radius: 12rpx; margin-bottom: 20rpx; font-size: 23rpx; color: #35624c; }
+.related-filter button { color: #244b3b; flex-shrink: 0; font-size: 22rpx; }
+.related-filter > text { flex: 1; min-width: 0; word-break: break-all; }
+.notes-toolbar { display: flex; justify-content: space-between; align-items: center; margin: 20rpx 0; font-size: 23rpx; }
+.toolbar-tag { color: #35624c; font-size: 21rpx; padding: 4rpx 0; background: transparent; border: 0; border-radius: 0; }
+.official-section { padding-bottom: 12rpx; border-bottom: 1rpx solid #e3e7e1; margin-bottom: 24rpx; }
+.official-heading { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12rpx; gap: 12rpx; }
+.official-heading > text { font-size: 30rpx; color: #244b3b; }
+.official-heading .text-link { font-size: 23rpx; }
+.official-caption { display: block; font-size: 23rpx; color: #68766a; margin-bottom: 20rpx; }
+content-card { display: block; margin-bottom: 20rpx; }
+.personal-note { background: transparent; border: 0; border-radius: 0; padding: 26rpx 0; margin-bottom: 0; border-bottom: 1rpx solid #e3e7e1; }
+.note-meta { display: flex; align-items: center; justify-content: space-between; gap: 14rpx; color: #68766a; font-size: 21rpx; }
+.note-meta > text:first-child { flex: 1; min-width: 0; word-break: break-all; }
+.note-type { flex-shrink: 0; color: #35624c; background: #edf1eb; border: 0; padding: 4rpx 12rpx; border-radius: 4rpx; font-size: 19rpx; }
+.personal-title { display: block; color: #263b30; font-size: 31rpx; margin-top: 14rpx; line-height: 1.6; word-break: break-all; overflow-wrap: anywhere; font-family: inherit; font-weight: 500; }
+.personal-preview { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: 25rpx; color: #68766a; line-height: 1.85; margin-top: 10rpx; word-break: break-all; overflow-wrap: anywhere; }
+.note-bottom { display: flex; justify-content: space-between; gap: 12rpx; align-items: center; margin-top: 16rpx; border-top: 0; padding-top: 0; font-size: 21rpx; }
+.note-metrics { display: flex; flex-wrap: wrap; align-items: center; gap: 10rpx 14rpx; min-width: 0; color: #68766a; }
+.local-note { font-size: 22rpx; color: #68766a; line-height: 1.85; margin: 20rpx 0 26rpx; }
+.empty-state { background: #fff; padding: 38rpx 26rpx; margin-bottom: 22rpx; }
+.empty-title { display: block; color: #263b30; font-size: 31rpx; }
+.empty-copy { display: block; margin-top: 14rpx; font-size: 24rpx; line-height: 1.8; }
+.empty-link { justify-content: center; margin-top: 22rpx; }
+.fallback-links { display: flex; flex-wrap: wrap; gap: 16rpx; justify-content: center; margin-top: 22rpx; }
+.fallback-links button { font-size: 23rpx; }
+.note-meta-actions { display: flex; flex: 1; align-items: center; flex-wrap: wrap; gap: 10rpx; min-width: 0; }
+.note-action { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; gap: 7rpx; min-width: 94rpx; min-height: 64rpx; padding: 10rpx 14rpx; border: 1rpx solid #e3e7e1; border-radius: 6rpx; background: #fff; color: #68766a; font-size: 22rpx; line-height: 1.5; }
+.note-action-active { color: #244b3b; background: #edf1eb; border-color: #a8b8a3; }
+.note-action-favorite-active { color: #806138; background: #f5efe4; border-color: #d7c5a5; }
+.note-action-loading { opacity: .62; }
+.note-action-loading .note-action-icon { display: none; }
+.note-action-icon { display: flex; align-items: center; flex-shrink: 0; line-height: 1; }
+.note-action-count, .note-view-stat { font-variant-numeric: tabular-nums; }
+.note-view-stat { display: flex; flex-basis: 100%; flex-wrap: wrap; align-items: center; gap: 6rpx 14rpx; color: #68766a; font-size: 21rpx; }
+.note-today-views { color: #526553; font-size: 20rpx; }
+.note-bottom > app-icon { flex-shrink: 0; align-self: flex-start; margin-top: 10rpx; }
+@media (max-width: 350px) { .personal-note { padding: 26rpx 0; margin-bottom: 0; background: transparent; border: 0; border-bottom: 1rpx solid #e3e7e1; border-radius: 0; } .note-action { min-width: 84rpx; padding: 10rpx 12rpx; font-size: 21rpx; border: 1rpx solid #e3e7e1; background: #fff; border-radius: 6rpx; } .note-meta { flex-wrap: wrap; gap: 8rpx; } .note-bottom { gap: 8rpx; margin-top: 16rpx; padding-top: 0; border-top: 0; } .note-metrics { gap: 8rpx; } }
+
+.notes-search-box { display: flex; align-items: center; gap: 14rpx; padding: 0 20rpx; margin-bottom: 24rpx; border: 1rpx solid #e3e7e1; border-radius: 10rpx; background: #fff; }

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "登录百草源",
+  "usingComponents": {
+    "page-header": "/components/page-header/index",
+    "app-icon": "/components/app-icon/index"
+  }
+}

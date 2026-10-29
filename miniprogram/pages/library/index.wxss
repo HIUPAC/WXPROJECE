@@ -1,0 +1,62 @@
+.library-page { padding-top: 32rpx; padding-bottom: 48rpx; }
+.library-intro { padding-bottom: 24rpx; }
+.library-title { display: block; color: #263b30; font-size: 38rpx; font-weight: 600; line-height: 1.4; font-family: inherit; }
+.library-description { display: block; margin-top: 10rpx; color: #68766a; font-size: 24rpx; line-height: 1.7; }
+.archive-intro-note { display: flex; align-items: center; gap: 10rpx; margin-top: 18rpx; color: #68766a; font-size: 21rpx; line-height: 1.7; }
+.search-box { display: flex; align-items: center; gap: 16rpx; width: 100%; min-height: 88rpx; padding: 0 22rpx; border: 1rpx solid #e3e7e1; border-radius: 10rpx; background: #fff; }
+.search-input { flex: 1; min-width: 0; height: 88rpx; color: #263b30; font-size: 25rpx; }
+.search-placeholder { color: #68766a; font-size: 24rpx; }
+button.search-clear { display: flex; align-items: center; justify-content: center; width: 76rpx; height: 76rpx; margin-right: -14rpx; border-radius: 12rpx; }
+.filter-scroll { width: 100%; margin-top: 24rpx; white-space: nowrap; }
+.filter-row { display: inline-flex; align-items: center; gap: 32rpx; padding-bottom: 0; min-width: 100%; border-bottom: 1rpx solid #e3e7e1; }
+.filter-pill { flex: 0 0 auto; min-height: 84rpx; margin: 0; padding: 0 4rpx; border: 0; border-radius: 0; background: transparent; color: #68766a; font-size: 26rpx; font-weight: 500; line-height: 80rpx; border-bottom: 4rpx solid transparent; }
+.filter-pill-active { border-color: #244b3b; background: transparent; color: #244b3b; font-weight: 600; }
+.community-entry { display: flex; align-items: center; justify-content: space-between; gap: 18rpx; width: 100%; margin-top: 20rpx; padding: 20rpx; border: 1rpx solid #e3e7e1; border-radius: 10rpx; background: #fff; text-align: left; }
+.entry-copy { flex: 1; min-width: 0; }
+.entry-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 52rpx; height: 60rpx; border-radius: 0; background: transparent; }
+.community-entry-title { display: block; color: #244b3b; font-size: 27rpx; font-weight: 600; line-height: 1.5; }
+.community-entry-caption { display: block; margin-top: 4rpx; color: #68766a; font-size: 22rpx; line-height: 1.7; }
+.play-library-entry { background: #edf1eb; border-color: #edf1eb; }
+.play-library-entry .entry-icon { background: transparent; }
+.archive-filter-panel { margin-top: 8rpx; padding: 20rpx 0; border: 0; border-radius: 0; background: transparent; border-bottom: 1rpx solid #e3e7e1; }
+.archive-filter-top { display: flex; align-items: center; justify-content: space-between; gap: 12rpx; margin-bottom: 16rpx; }
+.archive-filter-heading { color: #68766a; font-size: 23rpx; line-height: 1.7; }
+.archive-filter-reset { min-height: 64rpx; padding: 12rpx 0 12rpx 16rpx; color: #244b3b; font-size: 23rpx; flex-shrink: 0; }
+.archive-picker-row { display: flex; gap: 14rpx; }
+.archive-picker { flex: 1; min-width: 0; }
+.archive-picker-button { display: flex; align-items: center; justify-content: space-between; gap: 12rpx; min-height: 80rpx; padding: 18rpx; border: 1rpx solid #e3e7e1; border-radius: 8rpx; background: #fff; color: #263b30; font-size: 25rpx; }
+.archive-picker-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.archive-picker-indicator { flex-shrink: 0; color: #68766a; font-size: 24rpx; display: flex; align-items: center; justify-content: center; }
+.botanical-toggle { display: flex; align-items: center; gap: 12rpx; width: 100%; min-height: 84rpx; margin-top: 12rpx; padding: 12rpx 0; color: #68766a; text-align: left; font-size: 23rpx; line-height: 1.7; }
+.botanical-checkbox { display: flex; align-items: center; justify-content: center; width: 36rpx; height: 36rpx; flex-shrink: 0; border: 1rpx solid #cbd8c6; border-radius: 9rpx; background: #fff; }
+.botanical-toggle-active { color: #244b3b; }
+.botanical-toggle-active .botanical-checkbox { border-color: #244b3b; background: #244b3b; }
+.library-results-heading { display: flex; align-items: center; justify-content: space-between; gap: 16rpx; margin: 30rpx 0 18rpx; }
+.result-title { color: #263b30; font-size: 29rpx; font-weight: 600; }
+.result-count { color: #68766a; font-size: 23rpx; }
+.library-card-list { display: flex; flex-direction: column; gap: 12rpx; }
+.library-card-wrap { min-width: 0; }
+.herb-list-entry { display: flex; align-items: center; gap: 12rpx; padding: 24rpx 0; border: 0; border-radius: 0; background: transparent; border-bottom: 1rpx solid #e3e7e1; }
+.herb-entry-main { flex: 1; min-width: 0; padding: 0; text-align: left; }
+.herb-entry-topline { display: flex; align-items: center; gap: 12rpx; }
+.herb-entry-title { color: #263b30; font-size: 32rpx; font-weight: 600; line-height: 1.5; }
+.herb-entry-stamp { flex-shrink: 0; padding: 3rpx 10rpx; border-radius: 8rpx; background: #f4eee3; color: #a17b44; font-size: 19rpx; }
+.herb-entry-meta { display: block; margin-top: 8rpx; color: #68766a; font-size: 23rpx; line-height: 1.6; }
+.herb-entry-alias { display: block; margin-top: 8rpx; color: #68766a; font-size: 22rpx; line-height: 1.6; }
+button.herb-entry-favorite { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 76rpx; height: 84rpx; margin: 0; padding: 0; border-radius: 8rpx; background: transparent; }
+button.herb-entry-favorite.herb-entry-favorite-active { background: #edf1eb; }
+.course-progress-caption { margin: 10rpx 8rpx 0; color: #244b3b; font-size: 22rpx; line-height: 1.7; }
+.search-empty { margin-top: 16rpx; padding: 48rpx 24rpx; background: #fff; border-radius: 12rpx; }
+.empty-icon { display: flex; align-items: center; justify-content: center; width: 90rpx; height: 90rpx; margin: 0 auto 22rpx; border-radius: 12rpx; background: #edf1eb; }
+.empty-title { display: block; color: #263b30; font-size: 30rpx; }
+.empty-description { display: block; margin-top: 12rpx; color: #68766a; font-size: 24rpx; line-height: 1.8; }
+.reset-button { margin-top: 24rpx; }
+.pagination-area { display: flex; flex-direction: column; align-items: center; gap: 18rpx; margin-top: 28rpx; }
+.pagination-caption { color: #68766a; font-size: 22rpx; }
+.load-more-button { width: 100%; }
+.collection-end { display: block; align-items: center; justify-content: center; flex-wrap: wrap; gap: 16rpx; margin-top: 32rpx; text-align: center; }
+.end-line { width: 62rpx; height: 1rpx; background: #e3e7e1; display: none; }
+.end-caption { width: 100%; color: #68766a; text-align: center; font-size: 22rpx; }
+@media (max-width: 350px) { .library-title { font-size: 34rpx; font-family: inherit; line-height: 1.4; } .filter-pill { padding: 0 4rpx; min-height: 84rpx; border: 0; border-bottom: 4rpx solid transparent; border-radius: 0; background: transparent; font-size: 26rpx; line-height: 80rpx; } .community-entry { padding: 20rpx; border-radius: 10rpx; } .archive-picker-button { padding: 16rpx 12rpx; background: #fff; min-height: 80rpx; border-radius: 8rpx; } }
+
+.collection-end > app-icon { display: none; }

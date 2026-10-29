@@ -1,0 +1,67 @@
+.home { overflow: hidden; }
+.home-intro { padding: 36rpx 36rpx 0; }
+.intro-top, .section-row { display: flex; align-items: center; justify-content: space-between; gap: 20rpx; }
+.intro-stamp { color: #68766a; font-size: 21rpx; }
+.hero-title { margin-top: 14rpx; color: #263b30; font-size: 46rpx; font-weight: 600; line-height: 1.4; letter-spacing: 1rpx; }
+.hero-description { display: block; margin-top: 12rpx; color: #68766a; font-size: 25rpx; }
+.search-entry { display: flex; align-items: center; gap: 16rpx; min-height: 88rpx; margin: 28rpx 0 24rpx; padding: 0 12rpx 0 22rpx; border: 1rpx solid #e0e5dc; border-radius: 10rpx; background: #fff; }
+.home-search { flex: 1; width: 0; min-width: 0; height: 80rpx; font-size: 25rpx; }
+.search-submit { flex-shrink: 0; min-height: 64rpx; padding: 12rpx 18rpx; border-radius: 6rpx; color: #244b3b; font-size: 24rpx; font-weight: 500; }
+.resume-card { display: flex; align-items: center; gap: 18rpx; width: 100%; margin-bottom: 22rpx; padding: 20rpx; border-left: 4rpx solid #244b3b; border-radius: 0; background: #edf1eb; text-align: left; }
+.resume-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 48rpx; height: 60rpx; }
+.resume-copy { flex: 1; min-width: 0; }
+.resume-label, .resume-title { display: block; }
+.resume-label { color: #68766a; font-size: 21rpx; }
+.resume-title { overflow: hidden; color: #244b3b; font-size: 27rpx; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
+.hero-visual { display: block; width: 100%; overflow: hidden; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #fff; text-align: left; }
+.hero-photo { width: 100%; height: 292rpx; }
+.hero-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16rpx; height: 292rpx; background: #edf1eb; color: #68766a; font-size: 24rpx; }
+.photo-copy { display: flex; align-items: center; justify-content: space-between; gap: 20rpx; padding: 22rpx 24rpx; }
+.photo-eyebrow { display: block; color: #68766a; font-size: 21rpx; }
+.photo-title { display: block; margin-top: 4rpx; color: #263b30; font-size: 29rpx; font-weight: 500; }
+.photo-arrow { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 60rpx; height: 60rpx; color: #244b3b; }
+.home-section { padding: 40rpx 36rpx 0; }
+.first-section { padding-top: 0; }
+.first-section .section-row { display: none; }
+.section-heading { display: block; font-size: 32rpx; }
+.section-caption { color: #68766a; font-size: 21rpx; }
+.section-copy { display: block; margin-top: 6rpx; color: #68766a; font-size: 23rpx; }
+.section-row .text-link { flex-shrink: 0; gap: 6rpx; min-height: 64rpx; font-size: 23rpx; }
+.entry-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 0; margin-top: 0; padding: 30rpx 0 26rpx; border-bottom: 1rpx solid #e3e7e1; }
+.entry-card { display: flex; flex-direction: column; align-items: center; min-width: 0; padding: 8rpx 0; text-align: center; }
+.entry-icon { display: flex; align-items: center; justify-content: center; width: 72rpx; height: 64rpx; margin-bottom: 12rpx; }
+.entry-title { display: block; color: #263b30; font-size: 25rpx; font-weight: 500; }
+.entry-description { display: block; margin-top: 5rpx; color: #68766a; font-size: 20rpx; }
+.course-section { padding-right: 0; padding-left: 0; }
+.course-section .section-row { padding: 0 36rpx; }
+.course-scroll { width: 100%; margin-top: 20rpx; }
+.course-track { display: flex; width: max-content; padding: 0 36rpx; }
+.course-card { flex: 0 0 550rpx; width: 550rpx; margin-right: 18rpx; white-space: normal; }
+.home-course-progress { display: block; padding: 12rpx 4rpx 0; color: #244b3b; font-size: 22rpx; }
+.scroll-caption { display: block; margin-top: 14rpx; padding: 0 36rpx; color: #68766a; font-size: 21rpx; }
+.activity-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 24rpx; margin-top: 16rpx; }
+.activity-card { min-width: 0; padding: 22rpx 0; border-bottom: 1rpx solid #e3e7e1; text-align: left; }
+.activity-heading { display: flex; align-items: center; gap: 12rpx; }
+.activity-title { color: #263b30; font-size: 26rpx; font-weight: 500; }
+.activity-description { display: block; margin-top: 8rpx; color: #68766a; font-size: 21rpx; }
+.play-progress { display: flex; align-items: center; justify-content: space-between; gap: 12rpx; margin-top: 18rpx; padding: 18rpx 20rpx; border-radius: 8rpx; background: #edf1eb; color: #526553; font-size: 22rpx; text-align: left; }
+.editorial-list { margin-top: 16rpx; }
+.editorial-note { display: flex; align-items: center; gap: 20rpx; padding: 22rpx 0; border-bottom: 1rpx solid #e3e7e1; text-align: left; }
+.editorial-image { flex-shrink: 0; width: 112rpx; height: 112rpx; border-radius: 8rpx; }
+.editorial-copy { flex: 1; min-width: 0; }
+.editorial-meta { color: #68766a; font-size: 21rpx; }
+.editorial-title { display: block; margin-top: 8rpx; color: #263b30; font-size: 26rpx; font-weight: 500; }
+.home-notes-links { display: flex; gap: 16rpx; margin-top: 24rpx; }
+.home-notes-links button { flex: 1; min-width: 0; padding: 20rpx 8rpx; font-size: 24rpx; }
+.local-note { display: block; margin-top: 16rpx; color: #68766a; font-size: 21rpx; line-height: 1.7; }
+.recent-list { margin-top: 12rpx; }
+.recent-row { display: flex; align-items: center; justify-content: space-between; gap: 16rpx; padding: 20rpx 0; border-bottom: 1rpx solid #e3e7e1; text-align: left; }
+.recent-row > view { flex: 1; min-width: 0; }
+.recent-title, .recent-meta { display: block; }
+.recent-title { color: #263b30; font-size: 25rpx; }
+.recent-meta { margin-top: 4rpx; color: #68766a; font-size: 21rpx; }
+.home-footer { padding: 48rpx 36rpx 40rpx; color: #68766a; font-size: 22rpx; text-align: center; }
+.home-footer app-icon { margin-right: 8rpx; }
+.footer-note { display: block; margin-top: 8rpx; font-size: 20rpx; }
+.network-notice { padding: 18rpx 36rpx; background: #f5efe4; color: #705934; font-size: 23rpx; line-height: 1.7; }
+@media (max-width: 350px) { .hero-title { font-size: 42rpx; } .intro-stamp { display: none; } .entry-title { font-size: 24rpx; } .entry-description { font-size: 19rpx; } .section-copy { font-size: 21rpx; } .activity-heading { gap: 8rpx; } .activity-title { font-size: 25rpx; } }

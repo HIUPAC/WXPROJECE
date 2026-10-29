@@ -1,0 +1,38 @@
+<page-header />
+<view class="home ui-page {{uiPhase}}">
+  <view wx:if="{{offline}}" class="network-notice">当前无网络 · 免费课程、互动练习和本机手记仍可使用。古籍资料包首次阅读需要网络。</view>
+  <view class="home-intro">
+    <view class="intro-top"><text class="eyebrow">本草 · 课程 · 自然观察</text><text class="intro-stamp">百草源学习手册</text></view>
+    <view class="hero-title">从一株草木开始</view>
+    <text class="hero-description">查阅本草、学习观察，记下身边的发现。</text>
+    <view class="search-entry"><app-icon name="search" color="#68766a" size="{{20}}" /><input class="home-search" value="{{searchQuery}}" bindinput="onSearchInput" bindconfirm="search" confirm-type="search" maxlength="100" placeholder="搜索本草、课程或观察方法" aria-label="搜索本草和课程" /><button class="search-submit" bindtap="search" hover-class="press-feedback">搜索</button></view>
+    <button wx:if="{{resume}}" class="resume-card" bindtap="continueReading" hover-class="press-feedback"><view class="resume-icon"><app-icon name="book" size="{{24}}" /></view><view class="resume-copy"><text class="resume-label">{{resume.label}} · {{resume.caption}}</text><text class="resume-title">{{resume.title}}</text></view><app-icon name="arrow" size="{{19}}" /></button>
+    <button class="hero-visual" bindtap="openItem" data-id="{{hero.id}}" aria-label="打开菊花本草档案" hover-class="press-feedback">
+      <image wx:if="{{!heroFailed}}" src="{{hero.image}}" class="hero-photo" mode="aspectFill" binderror="heroError" />
+      <view wx:else class="hero-placeholder"><app-icon name="leaf" size="{{48}}" /><text>从一朵菊花开始观察</text></view>
+      <view class="photo-copy"><view><text class="photo-eyebrow">本草档案 · 菊花</text><text class="photo-title">从花形、别名读懂一味本草</text></view><view class="photo-arrow"><app-icon name="arrow" size="{{20}}" /></view></view>
+    </button>
+  </view>
+  <view class="home-section first-section">
+    <view class="section-row"><text class="section-heading">开始探索</text><text class="section-caption">无需注册即可学习</text></view>
+    <view class="entry-grid"><button wx:for="{{entries}}" wx:key="kind" class="entry-card" bindtap="explore" data-kind="{{item.kind}}" hover-class="press-feedback"><view class="entry-icon"><app-icon name="{{item.icon}}" size="{{25}}" /></view><text class="entry-title">{{item.title}}</text><text class="entry-description">{{item.description}}</text></button></view>
+  </view>
+  <view class="home-section course-section">
+    <view class="section-row"><view><text class="section-heading">免费课程</text><text class="section-copy">从基础观察到动手练习</text></view><button class="text-link" bindtap="explore" data-kind="course" hover-class="press-feedback">全部课程<app-icon name="arrow" size="{{16}}" /></button></view>
+    <scroll-view class="course-scroll" scroll-x enhanced show-scrollbar="{{false}}"><view class="course-track"><view class="course-card" wx:for="{{courses}}" wx:key="id"><content-card item="{{item}}" favorite="{{item.favorite}}" bindfavorite="onFavorite" /><text wx:if="{{item.progress.started}}" class="home-course-progress">{{item.progress.finished ? '已完成' : '学习中'}} · {{item.progress.count}} / {{item.progress.total}} 节</text></view></view></scroll-view>
+    <text class="scroll-caption">向左滑动查看更多课程</text>
+  </view>
+  <view class="home-section play-section">
+    <view class="section-row"><view><text class="section-heading">练习与观察</text><text class="section-copy">答题、配对，完成今天的观察任务</text></view><button class="text-link" bindtap="openPlay" hover-class="press-feedback">游学场<app-icon name="arrow" size="{{16}}" /></button></view>
+    <view class="activity-grid"><button wx:for="{{activities}}" wx:key="mode" class="activity-card" data-mode="{{item.mode}}" bindtap="openPlay" hover-class="press-feedback"><view class="activity-heading"><app-icon name="{{item.icon}}" size="{{22}}" /><text class="activity-title">{{item.title}}</text></view><text class="activity-description">{{item.description}}</text></button></view>
+    <button class="play-progress" bindtap="openPlay" hover-class="press-feedback">{{playSummary.error ? playSummary.error : ('最佳成绩 ' + playSummary.quizBest + '/5 · 观察 ' + playSummary.observationCount + '/7 · 徽章 ' + playSummary.badgeCount + '/6')}}<app-icon name="arrow" size="{{15}}" /></button>
+  </view>
+  <view class="home-section notes-section">
+    <view class="section-row"><view><text class="section-heading">精选手记</text><text class="section-copy">观察方法与真实记录</text></view><button class="text-link" bindtap="openOfficialNotes" hover-class="press-feedback">全部 {{editorialTotal}} 篇<app-icon name="arrow" size="{{16}}" /></button></view>
+    <view class="editorial-list"><button wx:for="{{editorial}}" wx:key="id" class="editorial-note" bindtap="openItem" data-id="{{item.id}}" hover-class="press-feedback"><image class="editorial-image" src="{{item.image}}" mode="aspectFill" lazy-load /><view class="editorial-copy"><text class="editorial-meta">精选笔记 · {{item.category}}</text><text class="editorial-title">{{item.title}}</text></view><app-icon name="arrow" size="{{16}}" /></button></view>
+    <view class="home-notes-links"><button class="secondary-button" bindtap="openPublicNotes" hover-class="press-feedback">{{localEdition ? '阅读精选笔记' : '看看社区笔记'}}</button><button class="primary-button" bindtap="writeNote" hover-class="press-feedback">记录今天的发现</button></view>
+    <text class="local-note">{{localEdition ? '本机学习版 · 可阅读精选内容和记录私密手记，换机前请备份。' : '游客也能写私密手记，保存在当前设备；登录后可选择上传。'}}</text>
+  </view>
+  <view wx:if="{{recent.length}}" class="home-section recent-section"><view class="section-row"><text class="section-heading">最近阅读</text><button class="text-link" bindtap="clearHistory" hover-class="press-feedback">清除记录</button></view><view class="recent-list"><button wx:for="{{recent}}" wx:key="id" class="recent-row" data-kind="{{item.kind}}" data-id="{{item.id}}" bindtap="continueReading" hover-class="press-feedback"><view><text class="recent-title">{{item.title}}</text><text class="recent-meta">{{item.category}}</text></view><app-icon name="arrow" size="{{16}}" /></button></view><text class="local-note">阅读记录仅保存在当前设备，按身份分别保存。</text></view>
+  <view class="home-footer"><app-icon name="leaf" size="{{18}}" /><text>百草源</text><text class="footer-note">本草文化 · 自然观察</text></view>
+</view>

@@ -1,0 +1,7 @@
+<view class="header" style="padding-top: {{statusHeight}}px;">
+  <view class="navigation" style="height: {{navigationHeight}}px; padding-right: {{rightSpace}}px;">
+    <button wx:if="{{back}}" size="mini" class="back-button" bindtap="onBack" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100" aria-label="返回"><app-icon name="back" size="{{22}}" /></button>
+    <view wx:else class="brand-seal"><app-icon name="leaf" size="{{25}}" /></view>
+    <view class="brand-copy"><view class="title">{{title}}</view><view wx:if="{{subtitle}}" class="subtitle">{{subtitle}}</view></view>
+  </view>
+</view>

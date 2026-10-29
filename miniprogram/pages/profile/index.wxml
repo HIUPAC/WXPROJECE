@@ -1,0 +1,77 @@
+<page-header title="我的百草源" />
+<view class="page-shell profile-page ui-page {{uiPhase}}">
+
+  <view class="profile-identity">
+    <button class="profile-avatar" bindtap="editProfile" aria-label="{{user ? '编辑个人资料' : '登录账号'}}" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><image wx:if="{{user && user.avatarUrl && !avatarFailed}}" class="avatar-image" src="{{user.avatarUrl}}" mode="aspectFill" binderror="onAvatarError" /><text wx:else class="avatar-letter serif">{{user ? user.avatarText : '草'}}</text></button>
+    <view class="identity-copy"><text class="eyebrow">{{user ? (user.isDemo ? '本机体验账号' : (localEdition ? '本机学习版' : '云端账号')) : '游客模式'}}</text><text class="identity-name serif">{{user ? user.username : '游客学习者'}}</text><text class="identity-caption">{{user ? (user.bio || '记录自己的本草学习与观察。') : '收藏、课程与私密手记，随时开始。'}}</text></view>
+    <button wx:if="{{user}}" class="guest-badge edit-badge" bindtap="editProfile" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">编辑</button><text wx:else class="guest-badge">本机游客</text>
+  </view>
+  <view wx:if="{{user && user.tags.length}}" class="identity-tags"><text wx:for="{{user.tags}}" wx:key="*this" class="identity-tag">{{item}}</text></view>
+  <view wx:if="{{user && user.isDemo}}" class="demo-notice"><text class="demo-notice-title">本机体验 · 模拟社区</text><text>笔记、资料、点赞收藏和学习记录保存在当前设备，模拟公开内容仅在本机展示。</text><button wx:if="{{!localEdition}}" class="text-link" bindtap="openAuth" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">切换云端账号，使用真实社区 →</button></view>
+  <view wx:if="{{!user}}" class="login-panel"><text class="login-caption">无需注册即可读课、收藏和记录。可进入本机体验试用模拟社区。</text><button class="primary-button profile-demo-button" bindtap="enterDemo" loading="{{demoEntering}}" disabled="{{demoEntering}}" hover-class="{{demoEntering ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100">进入本机体验</button><view wx:if="{{!localEdition}}" class="login-actions"><button class="secondary-button" bindtap="openAuth" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">登录云端账号</button><button class="secondary-button" data-mode="register" bindtap="openAuth" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">注册</button></view></view>
+
+  <view class="storage-card"><text class="storage-card-title">{{localEdition ? '本机学习版' : (user ? (user.isDemo ? '体验记录保存在本机' : '云端笔记，本机学习') : '你的记录保存在这台设备')}}</text><text class="storage-card-copy">{{user && !user.isDemo && !localEdition ? '账号资料、笔记与互动保存在云端；收藏、课程、观察与本机手记留在当前设备。' : '本机记录不会自动上传。换机或清理缓存前，可导出备份；恢复后也不会自动公开。'}}</text><button data-scope="local" bindtap="openNotes">查看本机私密手记 →</button></view>
+  <view class="profile-stats">
+    <button class="stat-item" data-segment="favorites" bindtap="selectSegment" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><text class="stat-value serif">{{stats.favorites}}</text><text class="stat-label">收藏内容</text></button>
+    <button class="stat-item" data-scope="my" bindtap="openNotes" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><text class="stat-value serif">{{statsLoading ? '…' : (statsError ? '—' : stats.notes)}}</text><text class="stat-label">我的笔记</text></button>
+    <button class="stat-item" data-segment="learning" bindtap="selectSegment" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><text class="stat-value serif">{{learningItems.length}}</text><text class="stat-label">学习中</text></button>
+    <button class="stat-item" data-segment="completed" bindtap="selectSegment" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><text class="stat-value serif">{{stats.completed}}</text><text class="stat-label">已学完</text></button>
+  </view>
+  <view wx:if="{{user && (user.isDemo || !localEdition)}}" class="note-impact">
+    <view class="impact-heading"><text>我的笔记收获</text><text wx:if="{{statsLoading}}" class="impact-status">正在更新…</text><text wx:elif="{{!statsError}}" class="impact-status">{{user.isDemo ? '演示' : '云端'}} {{cloudStats.publicNotes}} 篇公共 · {{cloudStats.privateNotes}} 篇私密</text></view>
+    <view class="impact-stats"><button class="impact-item" data-scope="my" bindtap="openNotes" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><text class="impact-number serif">{{statsLoading ? '…' : (statsError ? '—' : cloudStats.views)}}</text><text>累计浏览</text></button><button class="impact-item" data-scope="my" bindtap="openNotes" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><text class="impact-number serif">{{statsLoading ? '…' : (statsError ? '—' : cloudStats.likes)}}</text><text>获赞</text></button><button class="impact-item" data-scope="my" bindtap="openNotes" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><text class="impact-number serif">{{statsLoading ? '…' : (statsError ? '—' : cloudStats.favorites)}}</text><text>被收藏</text></button></view>
+    <text wx:if="{{!statsLoading && !statsError && cloudStats.todayViews !== null}}" class="impact-view-hint">今日新增 {{cloudStats.todayViews}} 次浏览 · 作者本人阅读不计数</text>
+    <text wx:if="{{user.isDemo}}" class="impact-view-hint">演示观看计数可在公共列表的“官方示例”笔记中体验。</text>
+    <view class="interaction-links"><button data-scope="favorites" bindtap="openNotes">收藏笔记 {{statsError ? '—' : cloudStats.savedNotes}}</button><button data-scope="liked" bindtap="openNotes">点赞笔记 {{statsError ? '—' : cloudStats.likedNotes}}</button></view>
+    <button wx:if="{{statsError}}" class="stats-error" bindtap="refresh" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">{{statsError}} · 点击重试</button>
+  </view>
+
+  <button class="play-profile" bindtap="openPlay" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><view><text class="serif play-profile-title">我的草木游学</text><text class="play-profile-caption">{{playSummary.error ? playSummary.error : ('最好答题 ' + playSummary.quizBest + '/5 · 观察 ' + playSummary.observationCount + '/7 · 徽章 ' + playSummary.badgeCount + '/6')}}</text><text class="play-profile-caption">当前账号 · 保存在本机</text></view><app-icon name="arrow" size="{{19}}"/></button>
+  <view class="journal-banner" bindtap="openNotes" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">
+    <view class="journal-icon"><app-icon name="pen" size="{{22}}" color="#244b3b" /></view>
+    <view class="journal-copy"><text class="journal-title serif">我的学习笔记</text><text class="journal-subtitle">查看观察记录与阅读心得</text></view>
+    <app-icon name="arrow" size="{{19}}" color="#244b3b" />
+  </view>
+  <button class="text-link community-link" data-scope="public" bindtap="openNotes" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">{{user.isDemo ? '打开演示公共笔记' : '去看看大家的公共笔记'}} <app-icon name="arrow" size="{{15}}" color="#244b3b" /></button>
+
+  <view class="collection-heading"><text class="section-heading serif">我的学习足迹</text><text class="collection-caption">一点一滴，都有回响</text></view>
+  <view class="collection-tabs">
+    <button class="collection-tab {{activeSegment === 'favorites' ? 'selected' : ''}}" data-segment="favorites" bindtap="selectSegment" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">收藏 <text>{{favoriteCount}}</text></button>
+    <button class="collection-tab {{activeSegment === 'learning' ? 'selected' : ''}}" data-segment="learning" bindtap="selectSegment" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">学习中 <text>{{learningItems.length}}</text></button>
+    <button class="collection-tab {{activeSegment === 'completed' ? 'selected' : ''}}" data-segment="completed" bindtap="selectSegment" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">已完成 <text>{{completedItems.length}}</text></button>
+  </view>
+
+  <view class="collection-content">
+    <block wx:if="{{activeSegment === 'favorites'}}">
+      <content-card wx:for="{{favoriteItems}}" wx:key="id" item="{{item}}" favorite="{{true}}" bindfavorite="toggleFavorite" />
+      <button wx:if="{{favoriteHasMore}}" class="secondary-button favorite-more" bindtap="loadMoreFavorites" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">加载更多收藏 · {{favoriteItems.length}} / {{favoriteCount}}</button>
+      <text wx:elif="{{favoriteCount > 24}}" class="favorite-end muted">已显示全部 {{favoriteCount}} 份收藏</text>
+      <view wx:if="{{favoriteItems.length === 0}}" class="empty-state profile-empty"><app-icon name="heart" size="{{28}}" color="#7b887a" /><text class="empty-title serif">把喜欢的草木故事留下来</text><text class="empty-copy muted">阅读时点亮收藏，便能在这里再次找到它。</text><button class="text-link empty-link" bindtap="openLibrary" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">去发现好内容 <app-icon name="arrow" size="{{14}}" color="#244b3b" /></button></view>
+    </block>
+    <block wx:elif="{{activeSegment === 'learning'}}">
+      <view wx:for="{{learningItems}}" wx:key="id" class="progress-card" data-id="{{item.id}}" bindtap="openCourse" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">
+        <image class="progress-image" src="{{item.image}}" mode="aspectFill" />
+        <view class="progress-info"><text class="course-category">{{item.category}} · {{item.minutes}} 分钟</text><text class="course-title serif">{{item.title}}</text><view class="progress-track"><view class="progress-fill" style="width: {{item.progress.percent}}%;"></view></view><view class="progress-caption"><text>已学 {{item.progress.count}} / {{item.progress.total}} 节</text><text class="continue-study">继续学习 →</text></view></view>
+      </view>
+      <view wx:if="{{learningItems.length === 0}}" class="empty-state profile-empty"><app-icon name="book" size="{{28}}" color="#7b887a" /><text class="empty-title serif">一堂课，开启草木之旅</text><text class="empty-copy muted">学完首个章节后，课程进度会留在这里。</text><button class="text-link empty-link" data-kind="course" bindtap="openLibrary" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">看看免费课程 <app-icon name="arrow" size="{{14}}" color="#244b3b" /></button></view>
+    </block>
+    <block wx:else>
+      <view wx:for="{{completedItems}}" wx:key="id" class="progress-card" data-id="{{item.id}}" bindtap="openCourse" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">
+        <image class="progress-image" src="{{item.image}}" mode="aspectFill" />
+        <view class="progress-info"><text class="course-category">{{item.category}}</text><text class="course-title serif">{{item.title}}</text><view class="completed-status"><app-icon name="check" size="{{15}}" color="#526e5d" /><text>已完成全部 {{item.progress.total}} 节</text></view><text class="review-link">再读一遍，温故知新 →</text></view>
+      </view>
+      <view wx:if="{{completedItems.length === 0}}" class="empty-state profile-empty"><app-icon name="check" size="{{28}}" color="#7b887a" /><text class="empty-title serif">每一步学习，都算数</text><text class="empty-copy muted">完成一门课程的全部章节后，会在这里留下足迹。</text><button class="text-link empty-link" data-kind="course" bindtap="openLibrary" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">开始一门课程 <app-icon name="arrow" size="{{14}}" color="#244b3b" /></button></view>
+    </block>
+  </view>
+
+  <view class="settings-list">
+    <button wx:if="{{user}}" class="settings-row" bindtap="editProfile" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><view class="settings-name"><app-icon name="pen" size="{{20}}" color="#526553" /><view><text class="settings-title">编辑个人资料</text><text class="settings-description">头像、个性标签与个人简介</text></view></view><app-icon name="arrow" size="{{17}}" color="#7b887a" /></button>
+    <button class="settings-row" bindtap="exportBackup" loading="{{exporting}}" disabled="{{exporting || restoring}}" hover-class="{{exporting ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100"><view class="settings-name"><app-icon name="download" size="{{20}}" color="#526553" /><view><text class="settings-title">导出本机备份</text><text class="settings-description">当前账号的收藏、课程、笔记与游学记录</text></view></view><app-icon name="arrow" size="{{17}}" color="#7b887a" /></button>
+    <button class="settings-row" bindtap="restoreBackup" loading="{{restoring}}" disabled="{{restoring || exporting}}"><view class="settings-name"><app-icon name="upload" size="{{20}}" color="#35624c" /><view><text class="settings-title">恢复本机备份</text><text class="settings-description">选择 JSON 文件或从剪贴板恢复</text></view></view><app-icon name="arrow" size="{{17}}" /></button>
+    <button class="settings-row" bindtap="openLegal" data-type="privacy"><view class="settings-name"><app-icon name="shield" size="{{20}}" color="#35624c" /><view><text class="settings-title">使用与隐私说明</text><text class="settings-description">数据存储、协议与联系渠道</text></view></view><app-icon name="arrow" size="{{17}}" /></button>
+    <button class="settings-row" bindtap="openAbout" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><view class="settings-name"><app-icon name="info" size="{{20}}" color="#526553" /><view><text class="settings-title">关于百草源</text><text class="settings-description">设计初心与使用说明</text></view></view><app-icon name="arrow" size="{{17}}" color="#7b887a" /></button>
+    <button wx:if="{{user}}" class="settings-row" bindtap="logout" loading="{{loggingOut}}" disabled="{{loggingOut}}" hover-class="{{loggingOut ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100"><view class="settings-name"><app-icon name="back" size="{{20}}" color="#526553" /><view><text class="settings-title">{{user.isDemo ? '退出本机体验' : '退出登录'}}</text><text class="settings-description">{{user.isDemo ? '体验记录保留在当前设备' : '云端笔记保留在账号中'}}</text></view></view><app-icon name="arrow" size="{{17}}" color="#7b887a" /></button>
+  </view>
+  <text class="local-caption">{{user && user.isDemo ? '体验内容仅保存在当前设备，可导出笔记与学习记录备份。' : (user ? '内容收藏、学习进度和本机笔记按账号保存在当前设备，换机前请导出备份。云端笔记及互动保存在账号中。' : '游客的收藏、学习进度和笔记保存在本机。登录后使用账号独立记录，游客记录仍会保留。')}}</text>
+  <view class="profile-footer"><text class="serif">百草源</text><text class="footer-label">本草文化 · 自然观察</text></view>
+</view>

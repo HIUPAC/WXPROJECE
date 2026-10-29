@@ -1,0 +1,43 @@
+<page-header title="草木手记" />
+<view class="page-shell notes-page ui-page {{uiPhase}}">
+  <view class="notes-intro"><view><text class="eyebrow">观察 · 阅读 · 记录</text><text class="notes-heading">草木手记</text></view><button class="new-note" bindtap="createNote" aria-label="新建笔记"><app-icon name="pen" size="{{18}}" color="#ffffff"/><text>新建</text></button></view>
+  <view class="storage-strip"><text class="storage-dot"></text><text>{{!user ? (localEdition ? '本机学习版 · 手记保存在当前设备' : '游客 · 我的手记保存在本机') : (user.isDemo ? '本机体验 · 模拟社区，仅当前设备可见' : (localEdition ? '本机学习版 · 当前账号本机记录' : '云端账号 · 笔记云端保存，学习记录存本机'))}}</text></view>
+  <scroll-view scroll-x class="tabs-scroll"><view class="notes-tabs">
+    <button class="notes-tab {{scope === 'my' ? 'selected' : ''}}" data-scope="my" bindtap="switchTab">{{user ? '我的笔记' : '我的手记'}}</button>
+    <button wx:if="{{!localEdition || user.isDemo}}" class="notes-tab {{scope === 'public' ? 'selected' : ''}}" data-scope="public" bindtap="switchTab">{{user.isDemo ? '模拟社区' : '公共笔记'}}</button>
+    <button class="notes-tab {{scope === 'featured' ? 'selected' : ''}}" data-scope="featured" bindtap="switchTab">官方精选</button>
+    <button wx:if="{{user}}" class="notes-tab {{scope === 'local' ? 'selected' : ''}}" data-scope="local" bindtap="switchTab">本机手记</button>
+    <button wx:if="{{!localEdition || user.isDemo}}" class="notes-tab {{scope === 'favorites' ? 'selected' : ''}}" data-scope="favorites" bindtap="switchTab">收藏</button>
+    <button wx:if="{{!localEdition || user.isDemo}}" class="notes-tab {{scope === 'liked' ? 'selected' : ''}}" data-scope="liked" bindtap="switchTab">点赞</button>
+  </view></scroll-view>
+  <view wx:if="{{relatedTitle}}" class="related-filter"><text>关联 · {{relatedTitle}}</text><button bindtap="clearRelated">清除 ×</button></view>
+  <view wx:if="{{scope === 'local'}}" class="local-note">{{user ? '当前账号的本机记录与登录前的游客手记分别保存。这里的笔记不会自动上传。' : '私密手记只保存在本机，不上传、不公开。'}}</view>
+  <view class="notes-search-box"><app-icon name="search" size="{{19}}" color="#68766a" /><input class="note-search" placeholder="{{scope === 'featured' ? '搜索观察方法、写作模板' : '搜索笔记标题或内容'}}" value="{{query}}" maxlength="100" bindinput="searchInput" confirm-type="search" aria-label="搜索笔记" /></view>
+  <block wx:if="{{scope === 'featured'}}">
+    <view class="notes-toolbar"><text class="muted">官方编辑内容 · {{officialTotal}} 篇</text><text class="toolbar-tag">离线可读</text></view>
+    <content-card wx:for="{{featured}}" wx:key="id" item="{{item}}" favorite="{{item.favorite}}" bindfavorite="toggleFavorite" />
+    <view wx:if="{{!featured.length}}" class="empty-state">没有找到相关内容，换个关键词试试。</view>
+  </block>
+  <block wx:else>
+    <view wx:if="{{scope === 'public'}}" class="official-section"><view class="official-heading"><text class="serif">先读一篇官方笔记</text><button class="text-link" bindtap="openOfficialNotes">全部 {{officialTotal}} 篇 →</button></view><text class="official-caption">观察方法与写作模板，云端不可用时也能阅读。</text><content-card wx:for="{{officialPreview}}" wx:key="id" item="{{item}}" favorite="{{item.favorite}}" bindfavorite="toggleFavorite" /></view>
+    <view class="notes-toolbar"><text class="muted">{{scope === 'public' ? (user.isDemo ? '模拟社区 · ' : '学习者分享 · ') : ''}}{{searchPending ? '正在搜索…' : (loading ? '正在加载…' : ('共 ' + total + ' 篇'))}}</text><text wx:if="{{scope === 'my' && !user || scope === 'local'}}" class="toolbar-tag">本机私密</text></view>
+    <view wx:if="{{needsLogin}}" class="empty-state"><text class="empty-title">登录后查看笔记互动</text><text class="empty-copy">本机体验也可以试用点赞和收藏。</text><button class="primary-button" bindtap="login">登录 / 本机体验</button><button class="text-link empty-link" bindtap="openLocalNotes">查看本机私密手记 →</button></view>
+    <view wx:if="{{error}}" class="empty-state error-state"><text class="empty-title">笔记暂时未能加载</text><text class="empty-copy">{{error}}</text><button class="secondary-button" bindtap="retry">重试云端加载</button><view class="fallback-links"><button class="text-link" bindtap="openOfficialNotes">阅读官方精选</button><button class="text-link" bindtap="openLocalNotes">查看本机手记</button></view></view>
+    <view wx:if="{{!loading && !searchPending && !error && !needsLogin && notes.length === 0}}" class="empty-state note-empty"><text class="empty-title serif">{{query ? '没有找到相关笔记' : (scope === 'favorites' ? '留一篇值得重读的笔记' : (scope === 'liked' ? '为喜欢的观察点个赞' : '从第一篇开始'))}}</text><text class="empty-copy">{{query ? '换个关键词试试，或清除搜索查看全部笔记。' : (scope === 'favorites' ? '收藏公开笔记后，可以在这里再次阅读。' : (scope === 'liked' ? '点赞过的笔记会保存在这里，方便以后回看。' : (scope === 'my' || scope === 'local' ? '记下叶片的形状，或阅读时的一点想法。' : '这里还没有相关笔记，试试其他分类。')))}}</text><button wx:if="{{scope === 'my' || scope === 'public' || scope === 'local'}}" class="primary-button" bindtap="createNote">写一篇手记</button><button wx:if="{{scope === 'favorites' || scope === 'liked'}}" class="secondary-button" bindtap="openPublicNotes">去看看公共笔记</button></view>
+    <view wx:for="{{notes}}" wx:key="listKey" class="personal-note" data-id="{{item.id}}" data-source="{{item.source}}" bindtap="openNote" hover-class="press-feedback">
+      <view class="note-meta"><text>{{item.author.username}} · {{item.dateLabel}}</text><text class="note-type">{{item.source !== 'cloud' ? (item.source === 'account-local' ? '账号本机' : '游客本机') : (user.isDemo ? (item.visibility === 'public' ? '模拟公开' : '本机私密') : (item.visibility === 'public' ? '云端公开' : '云端私密'))}}</text></view>
+      <text class="personal-title serif">{{item.title}}</text><text class="personal-preview">{{item.preview}}</text>
+      <view class="note-bottom">
+        <view class="note-metrics note-meta-actions" wx:if="{{item.source === 'cloud'}}">
+          <view class="note-view-stat"><text>{{item.viewCount}} 浏览</text><text wx:if="{{item.todayViewCount !== null}}" class="note-today-views">今日 {{item.todayViewCount}}</text></view>
+          <button class="note-action {{item.liked ? 'note-action-active' : ''}} {{item.actionLoading === 'like' ? 'note-action-loading' : ''}}" data-list-key="{{item.listKey}}" data-action="like" catchtap="react" disabled="{{item.actionLoading || searchPending}}" loading="{{item.actionLoading === 'like'}}" aria-label="{{item.liked ? '取消点赞' : '点赞这篇笔记'}}"><app-icon class="note-action-icon" name="heart" size="{{14}}" color="{{item.liked ? '#34745b' : '#788076'}}"/><text>{{item.liked ? '已赞' : '点赞'}}</text><text class="note-action-count">{{item.likeCount}}</text></button>
+          <button class="note-action {{item.favorite ? 'note-action-favorite-active' : ''}} {{item.actionLoading === 'favorite' ? 'note-action-loading' : ''}}" data-list-key="{{item.listKey}}" data-action="favorite" catchtap="react" disabled="{{item.actionLoading || searchPending}}" loading="{{item.actionLoading === 'favorite'}}" aria-label="{{item.favorite ? '取消收藏' : '收藏这篇笔记'}}"><app-icon class="note-action-icon" name="bookmark" size="{{14}}" color="{{item.favorite ? '#a17b44' : '#788076'}}"/><text>{{item.favorite ? '已藏' : '收藏'}}</text><text class="note-action-count">{{item.favoriteCount}}</text></button>
+        </view>
+        <text wx:else class="muted">{{item.source === 'account-local' ? '仅当前账号保存在这台设备' : '仅保存在这台设备'}}</text><app-icon name="arrow" size="{{14}}" />
+      </view>
+    </view>
+    <button wx:if="{{hasMore}}" class="secondary-button" loading="{{loading}}" disabled="{{loading || searchPending}}" bindtap="loadMore">加载更多</button>
+    <view wx:if="{{loading && !notes.length}}" class="empty-state">正在加载笔记…</view>
+    <view class="local-note"><text>{{user.isDemo ? '模拟公开只在本机列表可见。切换云端账号后可进行真实分享。' : (scope === 'local' || scope === 'my' && !user ? '换机或清理缓存前，记得在“我的”导出本机备份。' : '私密笔记在应用中仅作者可见。公开前请确认内容适合分享。')}}</text></view>
+  </block>
+</view>

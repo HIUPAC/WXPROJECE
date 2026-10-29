@@ -1,0 +1,38 @@
+<page-header title="{{id ? '编辑手记' : '新建手记'}}" back="{{true}}" prevent-back="{{true}}" bindback="onBack" />
+<view class="page-shell editor-page ui-page {{uiPhase}}">
+  <view wx:if="{{loading}}" class="empty-state">正在加载笔记…</view>
+  <view wx:elif="{{loadError || accountChanged}}" class="empty-state missing-note">
+    <text class="serif missing-title">{{accountChanged ? '账号已改变，请重新打开笔记' : '暂时无法编辑这篇笔记'}}</text>
+    <text class="muted missing-copy">{{loadError || '草稿保留在原账号下，返回笔记列表后继续。'}}</text>
+    <button wx:if="{{loadError && !accountChanged}}" class="secondary-button" bindtap="retryLoad">重新加载</button>
+    <button wx:if="{{accountChanged && !user}}" class="secondary-button" bindtap="login" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">重新登录，继续编辑</button>
+    <button class="primary-button missing-back" bindtap="onBack" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">返回笔记</button>
+  </view>
+  <block wx:else>
+    <view wx:if="{{demoMode && source === 'cloud'}}" class="demo-hint">本机体验 · 模拟公开只在当前设备可见。</view>
+    <text class="editor-heading serif">记下今天的发现</text>
+    <view class="editor-kicker"><text class="eyebrow">{{source !== 'cloud' ? '本机私密手记' : (demoMode ? '本机体验笔记' : '云端笔记')}}</text><text class="editor-status">{{dirty ? (draftSaved ? '草稿已存本机' : '草稿未保存') : (id ? '已保存' : '新建记录')}}</text></view>
+    <view wx:if="{{relatedTitle}}" class="related-note"><app-icon name="book" size="{{15}}" color="#68766a" /><text>关联阅读 · {{relatedTitle}}</text></view>
+    <view class="editor-sheet">
+      <view class="title-field">
+        <input class="note-title-input serif" value="{{title}}" disabled="{{saving}}" placeholder="给这篇笔记一个标题" placeholder-class="title-placeholder" maxlength="80" bindinput="onTitleInput" cursor-spacing="30" />
+        <text class="character-count">{{titleCount}} / 80</text>
+      </view>
+      <textarea class="note-body-input" value="{{body}}" disabled="{{saving}}" placeholder="{{bodyPlaceholder}}" placeholder-class="body-placeholder" maxlength="10000" bindinput="onBodyInput" cursor-spacing="50" show-confirm-bar="{{false}}" adjust-position="{{true}}" auto-height="{{true}}" />
+      <view class="editor-footnote"><text>观察 · 阅读 · 思考</text><text>{{bodyCount}} / 10000 字</text></view>
+    </view>
+    <view class="visibility-panel">
+      <text class="visibility-title">谁可以看见这篇笔记</text>
+      <view class="visibility-options"><button class="visibility-option {{visibility === 'private' ? 'chosen' : ''}}" data-visibility="private" bindtap="chooseVisibility" disabled="{{saving}}" hover-class="{{saving ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100"><text>私密</text><text class="option-caption">仅自己可见</text></button><button wx:if="{{!localEdition || demoMode}}" class="visibility-option {{visibility === 'public' ? 'chosen' : ''}}" data-visibility="public" bindtap="chooseVisibility" disabled="{{saving}}" hover-class="{{saving ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100"><text>公共</text><text class="option-caption">{{demoMode ? '演示列表可见' : '其他用户可浏览'}}</text></button></view>
+      <text class="visibility-hint muted">{{source === 'account-local' && visibility === 'private' ? '保存在当前账号的本机手记中，不上传云端。可另存云端副本。' : (demoMode ? (visibility === 'public' ? '保存到本机模拟公开列表，不会分享给其他设备。' : '保存在本机体验账号中，仅在我的笔记中可见。') : (visibility === 'public' ? (user ? '公开到云端社区。请勿写入本人或他人的敏感信息。' : '登录云端账号后公开。本机原手记会保留。') : (user ? '保存到云端账号，在应用中仅作者可见。' : '仅保存在当前设备，不会自动上传。')))}}</text>
+      <text wx:if="{{importing}}" class="visibility-hint muted">{{demoMode ? '保存演示副本，保留本机原手记。' : '上传后保留本机原手记，不会自动删除。'}}</text>
+    </view>
+    <view wx:if="{{saveError}}" class="save-error" role="alert"><text>{{saveError}}</text><text>{{draftSaved ? '当前输入已保存在本机草稿，可稍后重试保存。' : '草稿未能写入本机，请保留当前页面并重试保存。'}}</text></view>
+    <view class="save-panel">
+      <button class="primary-button save-button" bindtap="save" loading="{{saving}}" disabled="{{saving}}" hover-class="{{saving ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100"><text>{{source === 'account-local' && visibility === 'private' ? '保存本机私密手记' : (demoMode ? (visibility === 'public' ? '保存到模拟公开列表' : '保存本机体验笔记') : (visibility === 'public' ? (user ? '保存并公开' : '登录并公开') : (user ? '保存云端私密笔记' : '保存到本机')))}}</text></button>
+      <button wx:if="{{source === 'account-local' && visibility === 'private' && (!localEdition || demoMode)}}" class="secondary-button upload-login" bindtap="uploadCopy" disabled="{{saving}}">{{demoMode ? '另存本机体验副本' : '另存云端副本'}}</button>
+      <button wx:if="{{!user && visibility === 'private' && !localEdition}}" class="secondary-button upload-login" bindtap="login" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">登录并私密上传</button>
+      <text class="save-caption muted">{{source === 'account-local' ? '当前账号 · 本机存储，换机前请备份。' : (demoMode ? '本机体验仅在当前设备保存。' : (user ? '以云端保存成功提示为准。' : '换机或清理缓存前，请导出本机备份。'))}}</text>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,38 @@
+.editor-page { padding-bottom: calc(60rpx + env(safe-area-inset-bottom)); }
+.editor-heading { display: block; padding-top: 16rpx; line-height: 1.6; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 38rpx; font-weight: 600; color: #263b30; }
+.editor-kicker { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12rpx 16rpx; padding: 22rpx 0 28rpx; }
+.editor-kicker .eyebrow { font-size: 21rpx; letter-spacing: 0; color: #68766a; }
+.editor-status { padding: 5rpx 13rpx; background: #edf1eb; color: #68766a; font-size: 20rpx; border-radius: 6rpx; }
+.related-note { display: flex; align-items: center; gap: 12rpx; padding: 20rpx 24rpx; margin-bottom: 22rpx; border-radius: 12rpx; background: #edf1eb; font-size: 23rpx; line-height: 1.7; color: #526553; border: 0; }
+.related-note app-icon { flex-shrink: 0; }
+.related-note text { min-width: 0; word-break: break-all; }
+.editor-sheet { padding: 32rpx 30rpx 26rpx; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #fff; }
+.title-field { padding-bottom: 22rpx; border-bottom: 1rpx solid #e3e7e1; }
+.note-title-input { height: 70rpx; color: #244b3b; font-size: 34rpx; line-height: 1.65; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.title-placeholder { color: #929c8e; }
+.character-count { display: block; margin-top: 10rpx; color: #7b887a; font-size: 20rpx; text-align: right; font-variant-numeric: tabular-nums; }
+.note-body-input { display: block; box-sizing: border-box; width: 100%; min-height: 450rpx; margin-top: 28rpx; color: #263b30; font-size: 29rpx; line-height: 2; }
+.body-placeholder { color: #929c8e; line-height: 2; }
+.editor-footnote { display: flex; align-items: center; justify-content: space-between; gap: 16rpx; margin-top: 28rpx; padding-top: 22rpx; border-top: 1rpx solid #e3e7e1; color: #7b887a; font-size: 20rpx; }
+.visibility-panel { margin-top: 24rpx; padding: 24rpx 0; border: 0; border-top: 1rpx solid #e3e7e1; border-radius: 0; background: transparent; }
+.visibility-title { display: block; color: #263b30; font-size: 26rpx; font-weight: 500; }
+.visibility-options { display: flex; gap: 16rpx; margin-top: 22rpx; }
+.visibility-option { position: relative; flex: 1; min-width: 0; padding: 22rpx 24rpx; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #fff; text-align: left; font-size: 27rpx; transition: transform 160ms ease, opacity 160ms ease, background-color 200ms ease; color: #526553; }
+.visibility-option.chosen { color: #244b3b; border-color: #244b3b; background: #edf1eb; }
+.visibility-option.chosen::before { content: ''; position: absolute; top: 28rpx; right: 22rpx; width: 10rpx; height: 10rpx; border-radius: 50%; background: #244b3b; }
+.visibility-option text { display: block; }
+.option-caption { margin-top: 8rpx; font-size: 21rpx; line-height: 1.6; color: #68766a; }
+.visibility-hint { display: block; margin-top: 20rpx; font-size: 22rpx; line-height: 1.85; }
+.save-panel { margin-top: 28rpx; }
+.save-button { display: flex; align-items: center; justify-content: center; gap: 14rpx; }
+.save-button app-icon { flex-shrink: 0; margin-left: 0; }
+.upload-login { margin-top: 16rpx; }
+.save-caption { display: block; margin-top: 20rpx; padding: 0 8rpx; font-size: 21rpx; line-height: 1.8; text-align: center; }
+.missing-note { padding: 72rpx 24rpx; }
+.missing-title { display: block; color: #244b3b; font-size: 34rpx; line-height: 1.6; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.missing-copy { display: block; margin-top: 20rpx; font-size: 25rpx; line-height: 1.85; }
+button.missing-back { max-width: 340rpx; margin: 30rpx auto 0; }
+
+.save-error { margin-top: 20rpx; padding: 22rpx; background: #fbefea; border-radius: 12rpx; color: #a44d46; font-size: 24rpx; line-height: 1.8; }
+.save-error text { display: block; }
+.save-error text + text { margin-top: 10rpx; font-size: 22rpx; }

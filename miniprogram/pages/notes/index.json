@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "学习笔记",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "page-header": "/components/page-header/index",
+    "app-icon": "/components/app-icon/index",
+    "content-card": "/components/content-card/index"
+  }
+}

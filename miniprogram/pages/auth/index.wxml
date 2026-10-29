@@ -1,0 +1,25 @@
+<page-header title="{{mode === 'login' ? '云端账号' : '创建云端账号'}}" back="{{true}}" prevent-back="{{true}}" bindback="onBack" />
+<view class="page-shell auth-page ui-page {{uiPhase}}">
+  <view class="welcome"><text class="eyebrow">百草源 · {{localEdition ? '本机学习版' : '学习空间'}}</text><text class="welcome-title serif">让每一次发现都有归处</text><text class="welcome-copy">{{localEdition ? '当前开放内置阅读、课程和本机手记，云端注册与登录暂未开放。' : '云端账号用于保存和分享笔记。阅读、课程和游客私密手记可直接使用。'}}</text></view>
+  <view class="demo-panel"><view class="demo-heading"><text class="demo-title">本机体验</text><text class="mode-badge">无需注册</text></view><text class="demo-copy">体验模拟社区、资料和笔记互动。所有体验记录只保存在这台设备。</text><button class="secondary-button demo-button" bindtap="enterDemo" loading="{{demoEntering}}" disabled="{{submitting}}">{{demoEntering ? '正在进入…' : '进入本机体验'}}</button></view>
+  <block wx:if="{{!localEdition}}">
+  <view class="auth-tabs"><button class="auth-tab {{mode === 'login' ? 'selected' : ''}}" data-mode="login" bindtap="changeMode" disabled="{{submitting}}">登录</button><button class="auth-tab {{mode === 'register' ? 'selected' : ''}}" data-mode="register" bindtap="changeMode" disabled="{{submitting}}">注册</button></view>
+  <view class="form-sheet">
+    <view wx:if="{{mode === 'login'}}" class="form-field"><text class="field-label">学号或手机号</text><input class="field-input" value="{{account}}" data-field="account" bindinput="onInput" placeholder="输入注册时的学号或手机号" maxlength="32" disabled="{{submitting}}" placeholder-style="color: #68766a;" /></view>
+    <block wx:else>
+      <view class="form-field"><text class="field-label">学号</text><input class="field-input" value="{{studentId}}" data-field="studentId" bindinput="onInput" placeholder="4–32 位数字或字母" maxlength="32" disabled="{{submitting}}" placeholder-style="color: #68766a;" /></view>
+      <view class="form-field"><text class="field-label">手机号</text><input class="field-input" value="{{phone}}" data-field="phone" bindinput="onInput" placeholder="11 位手机号，用于账号登录" type="number" maxlength="11" disabled="{{submitting}}" placeholder-style="color: #68766a;" /></view>
+      <view class="form-field"><text class="field-label">用户名</text><input class="field-input" value="{{username}}" data-field="username" bindinput="onInput" placeholder="公开显示的名字，最多 20 字" maxlength="20" disabled="{{submitting}}" placeholder-style="color: #68766a;" /></view>
+    </block>
+    <view class="form-field"><text class="field-label">密码</text><view class="password-row"><input class="field-input password-input" value="{{password}}" data-field="password" bindinput="onInput" password="{{!showPassword}}" placeholder="{{mode === 'register' ? '设置 8–64 位密码' : '输入密码'}}" maxlength="64" disabled="{{submitting}}" placeholder-style="color: #68766a;" /><button class="password-toggle" bindtap="togglePassword" aria-label="{{showPassword ? '隐藏密码' : '显示密码'}}">{{showPassword ? '隐藏' : '显示'}}</button></view></view>
+    <view wx:if="{{mode === 'register'}}" class="form-field"><text class="field-label">确认密码</text><input class="field-input" value="{{confirmPassword}}" data-field="confirmPassword" bindinput="onInput" password="{{!showPassword}}" placeholder="再次输入密码" maxlength="64" disabled="{{submitting}}" placeholder-style="color: #68766a;" /></view>
+  </view>
+  <view wx:if="{{mode === 'register'}}" class="agreement-row"><checkbox-group bindchange="changeAgreement"><label class="agreement-check"><checkbox value="agree" checked="{{agreed}}" color="#244b3b" disabled="{{submitting}}" /><text>我已阅读并同意</text></label></checkbox-group><view class="agreement-links"><button data-type="terms" bindtap="openLegal" disabled="{{submitting}}">《用户协议》</button><button data-type="privacy" bindtap="openLegal" disabled="{{submitting}}">《隐私说明》</button></view></view>
+  <view wx:if="{{error}}" class="form-error" role="alert"><text>{{error}}</text></view>
+  <button class="primary-button submit-button" bindtap="submit" loading="{{submitting && !demoEntering}}" disabled="{{submitting}}">{{submitting && !demoEntering ? (mode === 'login' ? '正在登录…' : '正在创建…') : (mode === 'login' ? '登录云端账号' : '注册并登录')}}</button>
+  <text class="auth-caption">{{mode === 'login' ? '云端服务暂时不可用时，可继续本机体验。' : '学号和手机号不对外展示。注册不代表学校身份认证。'}}</text>
+  </block>
+  <view wx:if="{{localEdition && error}}" class="form-error" role="alert">{{error}}</view>
+  <button class="text-link guest-link" bindtap="continueLocally" disabled="{{submitting}}">继续使用游客私密手记 →</button>
+  <view class="legal-footer"><button data-type="privacy" bindtap="openLegal" disabled="{{submitting}}">隐私说明</button><button bindtap="onBack" disabled="{{submitting}}">返回阅读</button></view>
+</view>

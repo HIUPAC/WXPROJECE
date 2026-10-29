@@ -1,0 +1,82 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/library/index",
+    "pages/notes/index",
+    "pages/profile/index",
+    "pages/detail/index",
+    "pages/note-edit/index",
+    "pages/about/index",
+    "pages/auth/index",
+    "pages/profile-edit/index",
+    "pages/note-view/index",
+    "pages/play/index",
+    "pages/legal/index"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "百草源",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#f6f7f4",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#68766a",
+    "selectedColor": "#244b3b",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/ui/home-muted.png",
+        "selectedIconPath": "images/ui/home-green.png"
+      },
+      {
+        "pagePath": "pages/library/index",
+        "text": "探索",
+        "iconPath": "images/ui/leaf-muted.png",
+        "selectedIconPath": "images/ui/leaf-green.png"
+      },
+      {
+        "pagePath": "pages/notes/index",
+        "text": "笔记",
+        "iconPath": "images/ui/pen-muted.png",
+        "selectedIconPath": "images/ui/pen-green.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "images/ui/user-muted.png",
+        "selectedIconPath": "images/ui/user-green.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "subPackages": [
+    {
+      "root": "corpus01",
+      "name": "corpus01",
+      "pages": [
+        "entry"
+      ]
+    },
+    {
+      "root": "corpus02",
+      "name": "corpus02",
+      "pages": [
+        "entry"
+      ]
+    },
+    {
+      "root": "corpus03",
+      "name": "corpus03",
+      "pages": [
+        "entry"
+      ]
+    }
+  ]
+}

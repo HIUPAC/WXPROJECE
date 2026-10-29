@@ -1,0 +1,91 @@
+.play-page { padding-top: 24rpx; }
+.experience-panel { animation: experience-enter .24s ease-out both; }
+.play-heading { display: block; margin: 14rpx 0; color: #263b30; font-size: 38rpx; font-weight: 600; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.play-copy { display: block; margin-bottom: 22rpx; color: #68766a; font-size: 25rpx; line-height: 1.8; white-space: pre-line; }
+.play-summary { display: flex; margin: 24rpx 0; padding: 24rpx 8rpx; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #fff; }
+.play-summary view { flex: 1; text-align: center; }
+.play-summary view + view { border-left: 1rpx solid #edf1eb; }
+.play-summary text { display: block; color: #68766a; font-size: 21rpx; }
+.play-summary text:first-child { margin-bottom: 8rpx; color: #244b3b; font-size: 34rpx; font-weight: 600; font-variant-numeric: tabular-nums; }
+.module-grid, .badge-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16rpx; }
+.module-card { display: flex; flex-direction: column; width: 100%; padding: 24rpx; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #fff; text-align: left; min-height: 296rpx; min-width: 0; }
+.module-top { display: flex; align-items: center; justify-content: space-between; gap: 8rpx; width: 100%; }
+.module-icon { display: flex; align-items: center; flex-shrink: 0; width: 62rpx; height: 62rpx; background: transparent; border-radius: 0; justify-content: flex-start; }
+.module-top text { color: #68766a; font-size: 20rpx; }
+.module-title { display: block; color: #263b30; font-weight: 600; font-size: 29rpx; margin: 12rpx 0 10rpx; }
+.module-copy { display: block; flex: 1; color: #68766a; font-size: 23rpx; line-height: 1.75; }
+.module-link { display: flex; align-items: center; gap: 10rpx; margin-top: 20rpx; color: #244b3b; font-size: 23rpx; font-weight: 500; }
+.block-title { display: block; margin: 30rpx 0 18rpx; color: #263b30; font-size: 31rpx; font-weight: 600; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.badge { padding: 22rpx; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #fff; color: #68766a; min-width: 0; }
+.badge.earned { border-color: #cbd8c6; background: #edf1eb; color: #244b3b; }
+.badge-title, .badge-hint, .badge-status { display: block; }
+.badge-title { margin-top: 12rpx; font-size: 26rpx; font-weight: 500; }
+.badge-hint { margin-top: 8rpx; font-size: 22rpx; line-height: 1.75; }
+.badge-status { display: inline-block; margin-top: 14rpx; padding: 4rpx 12rpx; background: #f6f7f4; font-size: 20rpx; border-radius: 6rpx; }
+.badge.earned .badge-status { background: #fff; color: #244b3b; }
+.topic-scroll { width: 100%; margin-bottom: 24rpx; white-space: nowrap; }
+.topic-row { display: inline-flex; gap: 12rpx; padding-bottom: 8rpx; }
+.topic-row .chip { min-height: 80rpx; padding: 19rpx 24rpx; border-radius: 12rpx; }
+.question-sheet, .mission-sheet, .quiz-result { padding: 26rpx; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #fff; }
+.question-progress { height: 8rpx; margin: 16rpx 0 24rpx; overflow: hidden; border-radius: 8rpx; background: #edf1eb; }
+.question-progress-fill { height: 100%; border-radius: 8rpx; background: #35624c; transition: width .24s ease; }
+.question-title { display: block; margin: 18rpx 0 24rpx; color: #263b30; font-size: 31rpx; font-weight: 500; line-height: 1.75; }
+.answer-option { display: flex; gap: 14rpx; width: 100%; min-height: 92rpx; margin-bottom: 14rpx; padding: 22rpx; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #f6f7f4; color: #263b30; font-size: 26rpx; line-height: 1.75; text-align: left; }
+.answer-option text:first-child { flex-shrink: 0; color: #68766a; }
+.answer-option[disabled] { opacity: 1; color: #263b30; }
+.answer-correct { border-color: #a2b69a; background: #edf1eb; }
+.answer-wrong { border-color: #d8b9b0; background: #f8eeeb; }
+.explanation-panel { margin: 22rpx 0; padding: 22rpx; border-radius: 12rpx; background: #edf1eb; animation: experience-enter .24s ease-out both; }
+.explanation-title { display: block; color: #244b3b; font-size: 25rpx; font-weight: 500; line-height: 1.75; }
+.explanation { display: block; margin: 12rpx 0; color: #68766a; font-size: 24rpx; line-height: 1.85; }
+.explanation-panel .text-link, .review-item .text-link { min-height: 76rpx; gap: 10rpx; padding: 14rpx 0; font-size: 24rpx; }
+.next-question { margin-top: 22rpx; }
+.result-caption { display: block; margin-top: 8rpx; color: #68766a; text-align: center; font-size: 23rpx; }
+.result-score { display: block; margin: 10rpx 0 18rpx; color: #244b3b; text-align: center; font-size: 68rpx; font-weight: 600; }
+.saved-label { display: block; margin: 12rpx 0 22rpx; color: #35624c; font-size: 23rpx; line-height: 1.8; }
+.review-item { padding: 22rpx 0; border-top: 1rpx solid #edf1eb; }
+.review-item:last-child { padding-bottom: 0; }
+.review-item .question-title { margin: 12rpx 0; font-size: 27rpx; }
+.review-status { color: #35624c; font-size: 22rpx; font-weight: 500; }
+.answer-label { display: block; margin-top: 8rpx; color: #68766a; font-size: 24rpx; line-height: 1.8; }
+.save-error { display: block; margin: 20rpx 0; padding: 18rpx 20rpx; border: 1rpx solid #ead5ce; border-radius: 12rpx; background: #f8eeeb; color: #995947; text-align: left; font-size: 24rpx; line-height: 1.8; }
+.match-status { display: flex; justify-content: space-between; gap: 16rpx; margin-bottom: 20rpx; padding: 20rpx 22rpx; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #fff; color: #35624c; font-size: 25rpx; }
+.match-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14rpx; margin-bottom: 24rpx; }
+.memory-card { display: flex; align-items: center; justify-content: center; flex-direction: column; width: 100%; min-height: 206rpx; padding: 16rpx 12rpx; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #edf1eb; color: #244b3b; font-size: 23rpx; line-height: 1.7; word-break: break-word; }
+.memory-card[disabled] { opacity: 1; color: #263b30; }
+.face-up { border-color: #cbd8c6; background: #fff; animation: card-reveal .22s ease-out; }
+.paired { border-color: #a2b69a; background: #edf1eb; }
+.memory-type, .memory-number { display: block; margin: 8rpx 0; color: #68766a; font-size: 20rpx; }
+.paired .memory-type { color: #244b3b; }
+.finished-panel { margin: 22rpx 0; padding: 24rpx; border-radius: 12rpx; background: #edf1eb; animation: experience-enter .24s ease-out both; }
+.finished-panel .block-title { margin-top: 0; }
+.finished-panel .play-copy { margin-bottom: 0; }
+.mission-selector-heading { display: flex; justify-content: space-between; gap: 14rpx; margin: 22rpx 0 16rpx; color: #263b30; font-size: 24rpx; }
+.mission-selector-heading text:last-child { color: #68766a; font-size: 22rpx; }
+.mission-scroll { width: 100%; margin-bottom: 22rpx; }
+.mission-list { display: inline-flex; gap: 12rpx; padding-bottom: 8rpx; }
+button.mission-chip { display: flex; align-items: flex-start; justify-content: space-between; flex-direction: column; gap: 12rpx; flex: 0 0 300rpx; width: 300rpx; min-height: 132rpx; padding: 20rpx; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #fff; color: #263b30; text-align: left; font-size: 25rpx; line-height: 1.6; }
+.mission-chip text:last-child { flex-shrink: 0; color: #68766a; font-size: 21rpx; }
+button.mission-chip.selected-mission { border-color: #a2b69a; background: #edf1eb; }
+.mission-sheet .block-title { margin-top: 0; }
+.prompt-label { display: block; color: #244b3b; font-size: 23rpx; font-weight: 500; }
+.mission-prompt { display: block; padding: 14rpx 0 20rpx; color: #68766a; font-size: 24rpx; line-height: 1.8; white-space: pre-line; }
+.observation-input { width: 100%; min-height: 260rpx; padding: 20rpx; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #f6f7f4; color: #263b30; font-size: 26rpx; line-height: 1.85; }
+.word-count { display: block; margin: 10rpx 0 20rpx; color: #68766a; text-align: right; font-size: 22rpx; }
+.mission-actions { display: flex; gap: 12rpx; margin-top: 18rpx; }
+.mission-actions button { flex: 1; min-width: 0; padding: 20rpx 10rpx; font-size: 24rpx; }
+.local-hint { display: block; margin-top: 22rpx; color: #68766a; font-size: 22rpx; line-height: 1.8; }
+.daily-closed, .daily-open { width: 100%; min-height: 440rpx; padding: 36rpx 26rpx; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #fff; text-align: center; }
+.daily-closed { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20rpx; }
+.daily-icon { display: flex; align-items: center; justify-content: center; width: 88rpx; height: 88rpx; background: transparent; border-radius: 0; }
+.daily-open { animation: experience-enter .24s ease-out both; }
+.daily-title { display: block; margin: 12rpx 0; color: #244b3b; font-size: 38rpx; font-weight: 600; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.daily-open-label { padding: 12rpx 22rpx; border-radius: 12rpx; background: #edf1eb; color: #244b3b; font-size: 25rpx; }
+.daily-task { display: block; margin: 24rpx 0 30rpx; color: #263b30; font-size: 27rpx; line-height: 1.85; }
+.daily-open button { margin-top: 18rpx; }
+.back-hub { justify-content: center; gap: 10rpx; width: 100%; min-height: 88rpx; margin-top: 28rpx; padding: 20rpx; font-size: 24rpx; }
+.back-hub app-icon { transform: rotate(180deg); }
+@keyframes experience-enter { from { opacity: 0; transform: translateY(10rpx); } to { opacity: 1; transform: translateY(0); } }
+@keyframes card-reveal { from { opacity: .6; } to { opacity: 1; } }
+@media (max-width: 350px) { .play-heading { font-size: 34rpx; } .module-card { padding: 20rpx; } .module-title { font-size: 28rpx; } .module-top text { font-size: 19rpx; } .module-copy { font-size: 22rpx; } .mission-chip { padding: 18rpx 14rpx; font-size: 23rpx; } .memory-card { font-size: 22rpx; padding: 14rpx 10rpx; } }
+@media (prefers-reduced-motion: reduce) { .experience-panel, .explanation-panel, .face-up, .finished-panel, .daily-open { animation: none; } .question-progress-fill { transition: none; } }

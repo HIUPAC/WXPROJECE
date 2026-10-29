@@ -1,0 +1,32 @@
+.auth-page { padding-top: 20rpx; }
+.welcome { padding: 16rpx 0 30rpx; }
+.welcome .eyebrow { color: #68766a; letter-spacing: 0; }
+.welcome-title { display: block; margin: 14rpx 0; font-weight: 600; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 38rpx; color: #263b30; }
+.welcome-copy, .demo-copy { display: block; color: #68766a; font-size: 25rpx; line-height: 1.85; }
+.demo-panel { padding: 24rpx; background: #edf1eb; border-radius: 12rpx; margin-bottom: 28rpx; }
+.demo-heading { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12rpx; }
+.demo-title { font-size: 28rpx; color: #244b3b; font-weight: 600; }
+.mode-badge { font-size: 20rpx; color: #35624c; background: #fff; padding: 5rpx 14rpx; border-radius: 6rpx; }
+.demo-button { margin-top: 18rpx; min-height: 78rpx; font-size: 25rpx; }
+.auth-tabs { display: flex; margin-bottom: 20rpx; padding: 0; gap: 32rpx; background: transparent; border-radius: 0; border-bottom: 1rpx solid #e3e7e1; }
+.auth-tab { font-size: 27rpx; color: #68766a; flex: none; padding: 18rpx 0; border-radius: 0; border-bottom: 3rpx solid transparent; margin-bottom: -1rpx; }
+.auth-tab.selected { color: #244b3b; font-weight: 600; background: transparent; border-bottom-color: #244b3b; }
+.form-sheet { background: #fff; border-radius: 12rpx; padding: 4rpx 26rpx; border: 1rpx solid #e3e7e1; }
+.form-field { padding: 24rpx 0; }
+.form-field + .form-field { border-top: 1rpx solid #e3e7e1; }
+.field-label { font-size: 25rpx; color: #263b30; font-weight: 500; }
+.field-input { height: 82rpx; width: 100%; margin-top: 14rpx; border-radius: 12rpx; background: #f6f7f4; padding: 0 18rpx; color: #263b30; font-size: 27rpx; border: 1rpx solid #e3e7e1; }
+.password-row { display: flex; gap: 10rpx; align-items: center; }
+.password-input { flex: 1; min-width: 0; }
+.password-toggle { flex-shrink: 0; margin-top: 14rpx; padding: 18rpx 8rpx; color: #35624c; font-size: 24rpx; }
+.agreement-row { margin-top: 22rpx; font-size: 23rpx; color: #68766a; }
+.agreement-check { display: flex; align-items: center; gap: 8rpx; }
+.agreement-check checkbox { transform: scale(.8); transform-origin: left center; width: 44rpx; }
+.agreement-links { display: flex; gap: 10rpx; padding-left: 52rpx; margin-top: 6rpx; }
+.agreement-links button { color: #244b3b; font-size: 24rpx; padding: 4rpx 0; }
+.form-error { margin-top: 20rpx; padding: 20rpx; color: #a44d46; background: #fbefea; border-radius: 12rpx; font-size: 24rpx; line-height: 1.7; }
+.submit-button { margin-top: 26rpx; }
+.auth-caption { display: block; margin-top: 18rpx; font-size: 22rpx; line-height: 1.75; text-align: center; color: #68766a; }
+.guest-link { justify-content: center; margin-top: 30rpx; padding: 14rpx 0; }
+.legal-footer { display: flex; justify-content: center; gap: 30rpx; margin-top: 16rpx; }
+.legal-footer button { font-size: 22rpx; color: #68766a; padding: 10rpx; }

@@ -1,0 +1,66 @@
+<page-header title="探索本草" subtitle="档案 · 课程 · 笔记" />
+<view class="page-shell library-page ui-page {{uiPhase}}">
+  <view class="library-intro">
+    <text class="library-title">查阅与学习</text>
+    <text class="library-description muted">从名称、别名，到古籍原文与观察方法。</text>
+    <view class="archive-intro-note"><app-icon name="book" size="{{16}}" color="#244b3b" /><text>《本草纲目》四库全书本 · {{archiveStats.entryCount}} 条档案</text></view>
+  </view>
+
+  <view class="search-box">
+    <app-icon name="search" size="{{19}}" color="#68766a" />
+    <input class="search-input" value="{{query}}" bindinput="searchInput" bindconfirm="refreshResults" placeholder="搜索名称、别名或学习关键词" placeholder-class="search-placeholder" maxlength="100" confirm-type="search" aria-label="搜索内容" />
+    <button wx:if="{{query}}" class="pressable search-clear" bindtap="clearSearch" aria-label="清除搜索" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><app-icon name="close" size="{{17}}" color="#68766a" /></button>
+  </view>
+  <button class="pressable community-entry play-library-entry" bindtap="openPlay" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><view class="entry-icon"><app-icon name="leaf" size="{{23}}" color="#244b3b" /></view><view class="entry-copy"><text class="community-entry-title">学习游戏</text><text class="community-entry-caption">五题闯关、术语翻牌与观察任务</text></view><app-icon name="arrow" size="{{18}}" /></button>
+
+  <scroll-view class="filter-scroll" scroll-x="{{true}}" show-scrollbar="{{false}}">
+    <view class="filter-row">
+      <button wx:for="{{filters}}" wx:key="kind" class="pressable filter-pill {{kind === item.kind ? 'filter-pill-active' : ''}}" data-kind="{{item.kind}}" bindtap="chooseFilter" aria-label="{{item.label}}" aria-pressed="{{kind === item.kind}}" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">{{item.label}}</button>
+    </view>
+  </scroll-view>
+
+  <button wx:if="{{kind === 'note'}}" class="pressable community-entry" bindtap="openPublicNotes" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><view class="entry-copy"><text class="community-entry-title">浏览社区笔记</text><text class="community-entry-caption">看看大家的观察与学习记录</text></view><app-icon name="arrow" size="{{18}}" /></button>
+
+  <view wx:if="{{kind === 'herb'}}" class="archive-filter-panel">
+    <view class="archive-filter-top"><text class="archive-filter-heading">按原书部类筛选</text><button wx:if="{{hasArchiveFilter}}" class="archive-filter-reset" bindtap="clearArchiveFilters" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">清除筛选</button></view>
+    <view class="archive-picker-row">
+      <picker class="archive-picker" range="{{departments}}" range-key="label" value="{{departmentIndex}}" bindchange="chooseDepartment" aria-label="选择本草部类"><view class="archive-picker-button pressable" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><text class="archive-picker-label">{{departments[departmentIndex].label}}</text><view class="archive-picker-indicator"><app-icon name="chevron-down" size="{{16}}" color="#68766a" /></view></view></picker>
+      <picker class="archive-picker" range="{{categories}}" range-key="label" value="{{categoryIndex}}" bindchange="chooseCategory" aria-label="选择本草分类"><view class="archive-picker-button pressable" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><text class="archive-picker-label">{{categories[categoryIndex].label}}</text><view class="archive-picker-indicator"><app-icon name="chevron-down" size="{{16}}" color="#68766a" /></view></view></picker>
+    </view>
+    <button class="pressable botanical-toggle {{botanicalOnly ? 'botanical-toggle-active' : ''}}" bindtap="toggleBotanical" aria-pressed="{{botanicalOnly}}" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><view class="botanical-checkbox"><app-icon wx:if="{{botanicalOnly}}" name="check" size="{{14}}" color="#ffffff" /></view><text>仅看植物部类（草、谷、菜、果、木）</text></button>
+  </view>
+
+  <view class="library-results-heading">
+    <text class="result-title">{{resultLabel}}</text>
+    <text class="result-count">{{resultCount}} 条</text>
+  </view>
+
+  <view wx:if="{{items.length}}" class="library-card-list">
+    <view wx:for="{{items}}" wx:key="id" class="library-card-wrap">
+      <view wx:if="{{item.archive}}" class="herb-list-entry">
+        <button class="pressable herb-entry-main" data-id="{{item.id}}" bindtap="openHerb" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">
+          <view class="herb-entry-topline"><text class="herb-entry-title serif">{{item.title}}</text><text wx:if="{{item.archive.entryType !== 'main'}}" class="herb-entry-stamp">{{item.archive.entryType === 'unapplied' ? '有名未用' : '附录'}}</text></view>
+          <text class="herb-entry-meta">{{item.archive.department}} · {{item.archive.category}} · 卷{{item.archive.volume}}</text>
+          <text wx:if="{{item.aliasLabel}}" class="herb-entry-alias">关联名称：{{item.aliasLabel}}</text>
+        </button>
+        <button size="mini" class="pressable herb-entry-favorite {{item.favorite ? 'herb-entry-favorite-active' : ''}}" data-id="{{item.id}}" bindtap="favoriteHerb" aria-label="{{item.favorite ? '取消收藏' : '收藏'}}{{item.title}}" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><app-icon name="heart" size="{{18}}" color="{{item.favorite ? '#244b3b' : '#7b887a'}}" /></button>
+      </view>
+      <content-card wx:else item="{{item}}" favorite="{{item.favorite}}" bindfavorite="toggleFavorite" />
+      <view wx:if="{{item.kind === 'course' && item.progress.started}}" class="course-progress-caption">{{item.progress.finished ? '已完成课程' : '学习中'}} · {{item.progress.count}} / {{item.progress.total}} 节</view>
+    </view>
+  </view>
+  <view wx:else class="empty-state search-empty">
+    <view class="empty-icon"><app-icon name="leaf" size="{{30}}" color="#68766a" /></view>
+    <text class="empty-title serif">没有符合条件的内容</text>
+    <text class="empty-description muted">试试更短的关键词，或清除搜索与筛选。</text>
+    <button class="pressable secondary-button reset-button" bindtap="resetFilters" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">查看全部内容</button>
+  </view>
+
+  <view wx:if="{{items.length}}" class="pagination-area"><text class="pagination-caption">已显示 {{items.length}} / {{resultCount}} 条</text><button wx:if="{{hasMore}}" class="pressable secondary-button load-more-button" bindtap="loadMore" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">加载更多</button></view>
+  <view wx:if="{{items.length && !hasMore}}" class="collection-end">
+    <view class="end-line"></view>
+    <app-icon name="leaf" size="{{17}}" color="#7b887a" />
+    <view class="end-line"></view>
+    <text class="end-caption">已显示全部内容</text>
+  </view>
+</view>

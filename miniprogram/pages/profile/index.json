@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "我的百草源",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "page-header": "/components/page-header/index",
+    "app-icon": "/components/app-icon/index",
+    "content-card": "/components/content-card/index"
+  }
+}

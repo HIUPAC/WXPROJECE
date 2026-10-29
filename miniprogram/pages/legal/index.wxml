@@ -1,0 +1,9 @@
+<page-header title="使用与隐私说明" back="{{true}}" />
+<view class="page-shell legal-page ui-page {{uiPhase}}">
+  <view class="legal-tabs"><button class="legal-tab {{type === 'terms' ? 'active' : ''}}" data-type="terms" bindtap="changeTab">用户协议</button><button class="legal-tab {{type === 'privacy' ? 'active' : ''}}" data-type="privacy" bindtap="changeTab">隐私说明</button></view>
+  <text class="legal-title serif">{{title}}</text><text class="legal-date">更新于 {{updatedAt}}</text>
+  <view class="legal-intro">注册前请阅读。本机阅读与游客私密手记无需创建账号。</view>
+  <view wx:for="{{sections}}" wx:key="title" class="legal-section"><text class="legal-heading">{{index + 1}}. {{item.title}}</text><text class="legal-copy" selectable>{{item.body}}</text></view>
+  <view class="legal-section"><text class="legal-heading">平台隐私保护指引</text><text class="legal-copy">平台隐私授权与本页的产品协议分开处理。请以微信弹窗和发布者配置的指引为准。</text><button class="secondary-button privacy-button" bindtap="openPrivacyContract">查看微信隐私保护指引</button></view>
+  <view class="legal-section"><text class="legal-heading">运营与联系</text><text wx:if="{{publisherName}}" class="legal-copy">运营主体：{{publisherName}}</text><text wx:if="{{contactDescription}}" class="legal-copy">{{contactDescription}}</text><button wx:if="{{contactEmail}}" class="contact-copy" bindtap="copyContact">{{contactEmail}} · 复制邮箱</button><text wx:else class="legal-copy">联系渠道尚未提供，可通过微信反馈与投诉入口提交有关问题。</text><text class="legal-copy">公开笔记可使用“举报内容问题”提交侵权、隐私泄露或不当内容举报；其他问题可通过微信小程序菜单的反馈与投诉入口提交。</text></view>
+</view>

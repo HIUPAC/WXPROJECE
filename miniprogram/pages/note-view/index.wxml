@@ -1,0 +1,36 @@
+<page-header title="草木手记" back="{{true}}" />
+<view class="page-shell note-reader ui-page {{uiPhase}}">
+  <view wx:if="{{demoMode && source === 'cloud'}}" class="demo-hint">本机体验 · 浏览、点赞和收藏仅记录在这台设备。</view>
+  <view wx:if="{{loading}}" class="empty-state">正在加载笔记…</view>
+  <view wx:elif="{{error}}" class="empty-state"><text>{{error}}</text><button class="secondary-button" bindtap="retry">重新加载</button><button wx:if="{{!user}}" class="secondary-button" bindtap="login">登录云端账号</button><button class="text-link" bindtap="openLocalNotes">查看本机手记</button><button class="text-link" bindtap="backToNotes">返回笔记列表</button></view>
+  <block wx:elif="{{note}}">
+    <view class="note-label eyebrow">{{source !== 'cloud' ? (source === 'account-local' ? '账号本机手记 · 私密' : '游客手记 · 本机私密') : (demoMode ? (note.visibility === 'public' ? '模拟公开 · 当前设备' : '本机体验 · 私密') : (note.visibility === 'public' ? '云端公开笔记' : '云端私密笔记'))}}</view>
+    <text class="reader-title serif">{{note.title}}</text>
+    <view class="author-row"><image wx:if="{{note.author.avatarUrl}}" class="author-avatar" src="{{note.author.avatarUrl}}" mode="aspectFill" binderror="avatarError" /><view wx:else class="author-avatar avatar-letter">{{note.author.avatarText}}</view><view><text class="author-name">{{note.author.username}}</text><text class="author-date">更新于 {{note.dateLabel}}</text></view></view>
+    <view wx:if="{{note.author.tags.length}}" class="author-tags"><text wx:for="{{note.author.tags}}" wx:key="*this">{{item}}</text></view>
+    <text wx:if="{{note.author.bio}}" class="author-bio muted">{{note.author.bio}}</text>
+    <button wx:if="{{relatedTitle}}" class="related-reading" bindtap="openRelated" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><app-icon name="book" size="{{16}}" /><text>关联阅读 · {{relatedTitle}}</text><app-icon name="arrow" size="{{14}}" /></button>
+    <view class="reader-body"><text wx:for="{{paragraphs}}" wx:key="index" class="reader-paragraph" selectable>{{item}}</text></view>
+    <block wx:if="{{source === 'cloud'}}">
+      <view class="reader-metrics" aria-label="笔记互动统计">
+        <view class="reader-stat"><text class="reader-stat-value serif">{{note.viewCount}}</text><text class="reader-stat-label">累计浏览</text></view>
+        <view class="reader-stat"><text class="reader-stat-value serif">{{note.todayViewCount === null ? '—' : note.todayViewCount}}</text><text class="reader-stat-label">今日浏览</text></view>
+        <view class="reader-stat"><text class="reader-stat-value serif">{{note.likeCount}}</text><text class="reader-stat-label">获得点赞</text></view>
+        <view class="reader-stat"><text class="reader-stat-value serif">{{note.favoriteCount}}</text><text class="reader-stat-label">被收藏</text></view>
+      </view>
+      <view class="view-recording"><text wx:if="{{viewRecording}}">正在更新浏览统计…</text><button wx:elif="{{viewError}}" class="view-retry" bindtap="retryView" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">{{viewError}} · 重试</button><text wx:else>{{viewFeedback}}</text></view>
+      <text class="view-rule muted">按北京时间每天统计，同一微信用户对同一篇笔记每天计一次；作者本人浏览不计数。</text>
+      <view class="social-actions">
+        <button class="secondary-button reaction-button {{note.liked ? 'active-action' : ''}}" data-action="like" bindtap="react" disabled="{{busy}}" loading="{{reactionAction === 'like'}}" aria-label="{{note.liked ? '取消点赞' : '点赞'}}，当前 {{note.likeCount}} 次点赞" aria-pressed="{{note.liked}}" hover-class="{{busy ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100"><app-icon wx:if="{{reactionAction !== 'like'}}" class="reaction-icon" name="heart" size="{{19}}" color="{{note.liked ? '#244b3b' : '#7b887a'}}" /><text class="reaction-label">{{note.liked ? '已点赞' : '点赞'}} · {{note.likeCount}}</text></button>
+        <button class="secondary-button reaction-button {{note.favorite ? 'active-action' : ''}}" data-action="favorite" bindtap="react" disabled="{{busy}}" loading="{{reactionAction === 'favorite'}}" aria-label="{{note.favorite ? '取消收藏' : '收藏笔记'}}，当前 {{note.favoriteCount}} 次收藏" aria-pressed="{{note.favorite}}" hover-class="{{busy ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100"><app-icon wx:if="{{reactionAction !== 'favorite'}}" class="reaction-icon" name="bookmark" size="{{19}}" color="{{note.favorite ? '#244b3b' : '#7b887a'}}" /><text class="reaction-label">{{note.favorite ? '已收藏' : '收藏'}} · {{note.favoriteCount}}</text></button>
+        <button wx:if="{{note.visibility === 'public' && !demoMode && !note.isDemo}}" class="secondary-button reaction-button" open-type="share" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><app-icon class="reaction-icon" name="arrow" size="{{19}}" /><text class="reaction-label">分享</text></button>
+      </view>
+      <text wx:if="{{reactionError}}" class="reaction-error" role="alert">{{reactionError}} · 点击点赞或收藏重试</text>
+      <text wx:if="{{!user}}" class="login-hint muted">登录后可以点赞和收藏，浏览无需登录。</text>
+      <view wx:if="{{note.visibility === 'public' && !demoMode && !note.isDemo}}" class="report-panel"><button class="report-button" bindtap="reportNote" disabled="{{reporting}}" loading="{{reporting}}">举报内容问题</button><text wx:if="{{reportError}}" class="report-error" role="alert">{{reportError}} · 可重新提交</text></view>
+    </block>
+    <view wx:if="{{note.mine || source !== 'cloud'}}" class="owner-actions"><button class="primary-button" bindtap="edit" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">{{source === 'local' && user ? (demoMode ? '另存本机体验副本' : '另存云端副本') : '编辑手记'}}</button><button wx:if="{{source !== 'local' || !user}}" class="delete-button" bindtap="remove" disabled="{{busy}}" hover-class="{{busy ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100">删除手记</button></view>
+    <text wx:if="{{source === 'account-local'}}" class="login-hint muted">仅保存在当前账号的本机记录中。进入编辑后可另存云端副本；本机原记录会保留。</text>
+    <text wx:if="{{source === 'local'}}" class="login-hint muted">{{demoMode ? '可以保存到演示账号，保留本机原手记。演示公共笔记仅在当前设备可见。' : '本机手记仅保存在这台设备。登录后可以选择私密上传，或公开给其他用户阅读。'}}</text>
+  </block>
+</view>

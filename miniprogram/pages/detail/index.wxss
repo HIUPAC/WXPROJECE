@@ -1,0 +1,102 @@
+page { background: #fff; }
+.detail-page { padding-bottom: calc(36rpx + env(safe-area-inset-bottom)); background: #fff; }
+.detail-heading { padding-top: 20rpx; padding-bottom: 0; }
+.detail-breadcrumb { display: flex; align-items: center; gap: 14rpx; margin-bottom: 16rpx; color: #68766a; font-size: 23rpx; }
+.breadcrumb-button { min-height: 72rpx; padding: 16rpx 0; background: transparent; color: #244b3b; font-size: 23rpx; line-height: 1.6; }
+.breadcrumb-divider { color: #a4b0a1; }
+.detail-topline { display: flex; align-items: center; justify-content: space-between; gap: 16rpx; }
+.free-tag { flex-shrink: 0; padding: 6rpx 14rpx; background: #edf1eb; color: #244b3b; font-size: 21rpx; border-radius: 6rpx; }
+.detail-title { display: block; margin: 20rpx 0 14rpx; font-weight: 600; line-height: 1.45; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 40rpx; color: #263b30; }
+.detail-subtitle { display: block; color: #68766a; font-size: 24rpx; line-height: 1.7; }
+.detail-description { display: block; margin-top: 18rpx; color: #68766a; font-size: 26rpx; line-height: 1.8; }
+.detail-actions { display: flex; align-items: center; justify-content: space-between; gap: 16rpx; margin: 20rpx 0 24rpx; }
+.reading-meta { color: #68766a; font-size: 23rpx; line-height: 1.6; }
+button.favorite-button { display: flex; align-items: center; justify-content: center; flex-shrink: 0; gap: 10rpx; width: 152rpx; max-width: 152rpx; min-width: 0; height: 80rpx; padding: 0 16rpx; margin: 0; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #fff; color: #68766a; font-size: 24rpx; line-height: 1.5; }
+button.favorite-button.favorite-button-active { background: #edf1eb; border-color: #cbd8c6; color: #244b3b; }
+.detail-image-block { margin: 0 36rpx; }
+.detail-image { display: block; width: 100%; height: 330rpx; border-radius: 12rpx; background: #edf1eb; }
+.detail-image-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20rpx; color: #68766a; font-size: 24rpx; }
+.image-caption { display: flex; align-items: center; gap: 12rpx; padding: 0; margin-top: 14rpx; color: #68766a; font-size: 21rpx; }
+.caption-line { width: 24rpx; height: 2rpx; background: #a17b44; }
+.detail-content { padding-top: 8rpx; }
+.section-title { display: block; color: #263b30; font-size: 31rpx; font-weight: 600; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.course-overview, .learning-goals, .chapter-reader, .herb-info, .archive-info, .learning-template, .related-learning, .learning-sources { margin-top: 24rpx; padding: 28rpx 0; border: 0; border-top: 1rpx solid #e3e7e1; border-radius: 0; background: transparent; }
+.course-overview { margin-top: 0; border-top: 0; padding-top: 0; }
+.course-overview .section-heading { display: flex; justify-content: space-between; align-items: center; gap: 14rpx; }
+.course-count { flex-shrink: 0; color: #68766a; font-size: 22rpx; }
+.progress-track { height: 8rpx; margin: 20rpx 0; overflow: hidden; border-radius: 8rpx; background: #edf1eb; }
+.progress-value { height: 100%; border-radius: 8rpx; background: #35624c; transition: width 240ms ease-out; }
+.course-finished { display: flex; align-items: center; gap: 12rpx; padding: 10rpx 0 16rpx; color: #244b3b; font-size: 23rpx; }
+.chapter-list { margin-top: 18rpx; }
+.chapter-row { display: flex; align-items: center; gap: 16rpx; width: 100%; min-height: 96rpx; text-align: left; line-height: 1.6; background: transparent; border: 0; border-bottom: 1rpx solid #e3e7e1; border-radius: 0; margin: 0; padding: 22rpx 12rpx; }
+.chapter-row-active { border-color: #e3e7e1; background: #edf1eb; }
+.chapter-number { flex-shrink: 0; width: 34rpx; color: #68766a; font-size: 23rpx; }
+.chapter-title { flex: 1; min-width: 0; color: #263b30; font-size: 26rpx; }
+.chapter-status { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40rpx; height: 40rpx; }
+.chapter-status-done { border-radius: 50%; background: #edf1eb; }
+.start-learning, .complete-button { display: flex; justify-content: center; align-items: center; gap: 12rpx; width: 100%; margin-top: 22rpx; }
+.start-learning app-icon, .complete-button app-icon { margin-left: 0; }
+.course-footnote { display: block; margin-top: 16rpx; color: #68766a; text-align: center; font-size: 21rpx; line-height: 1.7; }
+.course-quiz { margin-top: 18rpx; }
+.goal-line { display: block; margin-top: 14rpx; color: #263b30; font-size: 25rpx; line-height: 1.8; }
+.materials-label { display: block; margin: 24rpx 0 10rpx; color: #244b3b; font-size: 24rpx; font-weight: 500; }
+.materials-line { display: block; color: #68766a; font-size: 24rpx; line-height: 1.8; }
+.reader-topline { display: flex; align-items: center; justify-content: space-between; gap: 16rpx; }
+.reader-completed { color: #244b3b; font-size: 22rpx; }
+.reader-title { display: block; margin: 20rpx 0; color: #244b3b; font-size: 34rpx; font-weight: 600; line-height: 1.6; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.chapter-goal { display: block; margin-bottom: 24rpx; padding: 18rpx; color: #35624c; font-size: 24rpx; line-height: 1.8; border-radius: 0; border-left: 3rpx solid #a7b8aa; background: #f6f7f4; }
+.article-paragraph { display: block; margin-bottom: 24rpx; color: #263b30; font-size: 29rpx; line-height: 1.95; text-align: left; word-break: break-word; }
+.chapter-practice { margin-top: 26rpx; padding: 22rpx; border-radius: 12rpx; background: #f6f7f4; }
+.practice-title { display: block; color: #244b3b; font-size: 26rpx; font-weight: 600; }
+.practice-description, .checklist-line { display: block; margin-top: 10rpx; color: #263b30; font-size: 24rpx; line-height: 1.8; }
+.checklist-heading { margin-top: 22rpx; }
+.practice-note { margin-top: 22rpx; }
+.herb-info { margin-bottom: 26rpx; }
+.herb-info-row, .archive-info-row { display: flex; align-items: flex-start; gap: 22rpx; padding: 18rpx 0; border-bottom: 1rpx solid #edf1eb; font-size: 24rpx; line-height: 1.8; }
+.herb-info-row:last-child, .archive-info-row:last-child { border-bottom: 0; }
+.herb-info-label, .archive-info-label { flex-shrink: 0; width: 120rpx; color: #68766a; }
+.herb-info-value, .archive-info-value { flex: 1; min-width: 0; color: #263b30; }
+.article-heading { margin: 28rpx 0 22rpx; }
+.article-title { display: block; color: #244b3b; font-size: 32rpx; font-weight: 600; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.template-copy { display: block; margin: 20rpx 0; white-space: pre-wrap; color: #68766a; font-size: 25rpx; line-height: 1.9; }
+.template-hint { display: block; margin-top: 14rpx; color: #68766a; font-size: 22rpx; line-height: 1.8; }
+.related-learning-row { display: flex; align-items: center; justify-content: space-between; gap: 18rpx; width: 100%; min-height: 100rpx; padding: 20rpx 0; border-bottom: 1rpx solid #edf1eb; color: #263b30; text-align: left; font-size: 26rpx; line-height: 1.6; }
+.related-learning-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.related-learning-row > view { min-width: 0; }
+.related-learning-row text { display: block; }
+.related-category { margin-bottom: 6rpx; color: #68766a; font-size: 21rpx; }
+.source-row { width: 100%; min-height: 80rpx; padding: 18rpx 0; color: #35624c; text-align: left; font-size: 23rpx; line-height: 1.8; }
+.note-prompt { margin-top: 24rpx; border-radius: 12rpx; padding: 26rpx; background: #f6f7f4; }
+.note-prompt-top { display: flex; align-items: center; gap: 16rpx; }
+.note-icon { display: flex; align-items: center; justify-content: center; width: 66rpx; height: 66rpx; border-radius: 12rpx; background: #fff; }
+.note-prompt-title { display: block; color: #244b3b; font-size: 32rpx; font-weight: 600; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.note-prompt-description { display: block; margin-top: 16rpx; color: #68766a; font-size: 24rpx; line-height: 1.8; }
+.related-notes-links { margin-top: 18rpx; }
+.related-notes-button { display: flex; justify-content: space-between; gap: 16rpx; width: 100%; min-height: 84rpx; padding: 18rpx 0; margin: 0; border-bottom: 1rpx solid #e3e7e1; color: #35624c; font-size: 23rpx; line-height: 1.7; text-align: left; }
+.note-write-button { display: flex; align-items: center; justify-content: space-between; gap: 16rpx; width: 100%; min-height: 88rpx; padding: 22rpx; margin-top: 22rpx; border-radius: 12rpx; background: #fff; color: #244b3b; font-size: 26rpx; line-height: 1.5; text-align: left; }
+.detail-footer { display: flex; justify-content: center; margin-top: 26rpx; color: #68766a; }
+.share-button { display: flex; align-items: center; justify-content: center; gap: 10rpx; min-height: 84rpx; padding: 18rpx 24rpx; color: #68766a; font-size: 24rpx; line-height: 1.7; }
+.detail-missing { padding-top: 70rpx; }
+.missing-icon { display: flex; align-items: center; justify-content: center; width: 100rpx; height: 100rpx; margin: 0 auto 24rpx; border-radius: 12rpx; background: #edf1eb; }
+.missing-title { display: block; color: #244b3b; font-size: 32rpx; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.missing-description { display: block; margin: 18rpx 0 28rpx; color: #68766a; font-size: 25rpx; line-height: 1.8; }
+.archive-bookplate { margin: 0 36rpx; padding: 28rpx; border: 1rpx solid #e6dccb; border-radius: 12rpx; background: #f4eee3; }
+.archive-bookplate-line { display: flex; align-items: center; gap: 16rpx; }
+.archive-bookplate-title { color: #244b3b; font-size: 34rpx; font-weight: 600; line-height: 1.6; }
+.archive-bookplate-subtitle { display: block; margin-top: 12rpx; color: #68766a; font-size: 23rpx; line-height: 1.7; }
+.archive-bookplate-foot { display: block; margin-top: 16rpx; padding-top: 16rpx; border-top: 1rpx solid #e6dccb; color: #a17b44; font-size: 21rpx; }
+.archive-info { margin-bottom: 24rpx; }
+.archive-reading-note { display: block; margin-bottom: 26rpx; padding: 20rpx 22rpx; border-left: 4rpx solid #a17b44; border-radius: 0 12rpx 12rpx 0; background: #f4eee3; color: #866436; font-size: 23rpx; line-height: 1.8; }
+.archive-section-title { display: block; padding-bottom: 16rpx; margin-bottom: 22rpx; border-bottom: 1rpx solid #e3e7e1; color: #244b3b; font-size: 33rpx; font-weight: 600; line-height: 1.6; }
+.archive-section-picker { display: flex; align-items: center; justify-content: space-between; gap: 14rpx; min-height: 88rpx; margin: 18rpx 0 24rpx; padding: 20rpx; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #fff; color: #263b30; font-size: 25rpx; }
+.archive-reader-nav { display: flex; align-items: center; justify-content: space-between; gap: 14rpx; color: #68766a; font-size: 23rpx; }
+.archive-reader-nav .secondary-button { min-height: 84rpx; padding: 18rpx 22rpx; font-size: 24rpx; }
+.archive-recovery-actions { display: flex; gap: 14rpx; margin-bottom: 24rpx; }
+.archive-recovery-actions button { flex: 1; min-width: 0; padding: 20rpx 12rpx; font-size: 24rpx; }
+.archive-related-link { display: flex; align-items: center; justify-content: space-between; gap: 16rpx; width: 100%; margin-top: 26rpx; padding: 24rpx; border-radius: 12rpx; background: #edf1eb; color: #244b3b; font-size: 25rpx; line-height: 1.7; text-align: left; }
+.archive-source { margin-top: 28rpx; padding: 24rpx 0; border-top: 1rpx solid #e3e7e1; }
+.archive-source-title, .archive-source-url { display: block; color: #68766a; font-size: 22rpx; line-height: 1.8; }
+.archive-source-url { margin-top: 10rpx; word-break: break-word; }
+.archive-copy-source { width: 100%; margin-top: 20rpx; }
+@media (max-width: 350px) { .detail-title { font-size: 38rpx; } .course-overview, .learning-goals, .chapter-reader { padding: 22rpx 0; } .course-count { font-size: 21rpx; } .article-paragraph { font-size: 28rpx; } }
+@media (prefers-reduced-motion: reduce) { .progress-value { transition: none; } }

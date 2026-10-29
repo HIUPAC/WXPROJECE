@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "编辑个人资料",
+  "usingComponents": {
+    "page-header": "/components/page-header/index",
+    "app-icon": "/components/app-icon/index"
+  }
+}

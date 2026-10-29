@@ -1,0 +1,26 @@
+.about-page { padding-top: 24rpx; }
+.about-brand .eyebrow { color: #806138; font-size: 17rpx; letter-spacing: 2rpx; }
+.about-section { padding: 28rpx 0; margin-bottom: 0; background: transparent; border: 0; border-top: 1rpx solid #e3e7e1; border-radius: 0; }
+.about-heading { font-weight: 600; margin-bottom: 20rpx; line-height: 1.6; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 30rpx; color: #263b30; }
+.about-copy { color: #526553; font-size: 25rpx; line-height: 1.95; margin-bottom: 18rpx; }
+.about-copy:last-child { margin-bottom: 0; }
+.credit-item { margin: 18rpx 0; padding: 20rpx; border: 0; border-radius: 8rpx; background: #edf1eb; }
+.credit-item:last-child { margin-bottom: 0; }
+.credit-title { font-size: 25rpx; color: #263b30; line-height: 1.7; }
+.credit-author { color: #68766a; font-size: 22rpx; margin-top: 8rpx; }
+.credit-actions { display: flex; flex-wrap: wrap; gap: 12rpx; margin-top: 17rpx; }
+.credit-actions button { font-size: 21rpx; color: #244b3b; padding: 12rpx 17rpx; border: 1rpx solid #e3e7e1; background: #fff; transition: transform .16s ease, opacity .16s ease; border-radius: 6rpx; }
+.about-footnote { color: #68766a; font-size: 23rpx; line-height: 1.85; background: #f5f0e7; padding: 23rpx 26rpx; margin-top: 24rpx; border: 0; border-radius: 8rpx; }
+.about-version { text-align: center; color: #68766a; font-size: 21rpx; margin-top: 30rpx; }
+
+.about-brand { display: flex; align-items: center; gap: 24rpx; text-align: left; padding: 12rpx 0 28rpx; }
+.about-seal { flex-shrink: 0; margin: 0; width: 98rpx; height: 98rpx; font-size: 54rpx; display: flex; align-items: center; justify-content: center; border-radius: 12rpx; background: #edf1eb; color: #244b3b; }
+.about-title { margin: 0 0 6rpx; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 38rpx; font-weight: 600; letter-spacing: 0; color: #263b30; }
+.about-subtitle { display: block; font-size: 23rpx; color: #68766a; }
+.module-links { display: flex; flex-wrap: wrap; gap: 12rpx; margin-top: 22rpx; }
+.module-links button { padding: 14rpx 17rpx; color: #244b3b; background: #edf1eb; border-radius: 12rpx; font-size: 23rpx; }
+.mode-row { display: flex; gap: 18rpx; font-size: 24rpx; color: #68766a; line-height: 1.85; padding: 18rpx 0; border-bottom: 1rpx solid #e3e7e1; }
+.mode-title { flex: 0 0 126rpx; font-weight: 600; color: #244b3b; }
+.mode-row > text + text { flex: 1; }
+.backup-copy { margin-top: 20rpx; font-size: 23rpx; }
+.contact-copy { text-align: left; color: #244b3b; font-size: 25rpx; margin: 18rpx 0; overflow-wrap: anywhere; }

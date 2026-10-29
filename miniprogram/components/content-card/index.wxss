@@ -1,0 +1,25 @@
+:host { display: block; }
+.card { overflow: hidden; background: #fff; border: 1rpx solid #e3e7e1; border-radius: 12rpx; }
+.image-wrap { position: relative; height: 250rpx; background: #edf1eb; }
+.card-image { width: 100%; height: 100%; }
+.image-fallback { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16rpx; height: 100%; color: #68766a; font-size: 24rpx; }
+.kind-label { position: absolute; top: 18rpx; left: 18rpx; padding: 6rpx 12rpx; border-radius: 4rpx; background: #fff; color: #244b3b; font-size: 21rpx; }
+.card .favorite-button { position: absolute; top: 12rpx; right: 12rpx; display: flex; justify-content: center; align-items: center; flex: none; width: 72rpx; min-width: 0; max-width: 72rpx; height: 72rpx; padding: 0; margin: 0; border-radius: 8rpx; background: #fff; line-height: 1; }
+.card .favorite-button.is-favorite { background: #244b3b; }
+.card-copy { padding: 24rpx; }
+.card-meta { display: flex; justify-content: space-between; gap: 12rpx; color: #68766a; font-size: 21rpx; }
+.card-title { margin-top: 12rpx; color: #263b30; font-size: 31rpx; font-weight: 600; line-height: 1.5; }
+.card-description { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 84rpx; margin-top: 10rpx; color: #68766a; font-size: 24rpx; line-height: 1.75; white-space: normal; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20rpx; padding-top: 16rpx; border-top: 1rpx solid #e3e7e1; color: #244b3b; font-size: 23rpx; }
+.archive-card .image-wrap { height: 158rpx; }
+.archive-card .image-fallback { flex-direction: row; }
+.archive-card .card-description { min-height: 0; }
+.note-card { display: flex; flex-direction: row-reverse; align-items: flex-start; gap: 22rpx; padding: 24rpx 0; border: 0; border-bottom: 1rpx solid #e3e7e1; border-radius: 0; background: transparent; }
+.note-card .image-wrap { flex: 0 0 154rpx; width: 154rpx; height: 166rpx; overflow: hidden; border-radius: 8rpx; }
+.note-card .kind-label { display: none; }
+.note-card .favorite-button { top: auto; bottom: 0; right: 0; width: 64rpx; height: 64rpx; max-width: 64rpx; border-radius: 8rpx 0 0 0; }
+.note-card .card-copy { flex: 1; min-width: 0; padding: 0; }
+.note-card .card-title { margin-top: 6rpx; font-size: 29rpx; }
+.note-card .card-description { min-height: 0; margin-top: 8rpx; font-size: 23rpx; }
+.note-card .card-footer { margin-top: 12rpx; padding-top: 0; border-top: 0; font-size: 22rpx; }
+.press-feedback { opacity: .7; }

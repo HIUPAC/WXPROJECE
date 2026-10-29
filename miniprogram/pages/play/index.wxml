@@ -1,0 +1,116 @@
+<page-header title="{{title}}" subtitle="学习游戏" back="{{true}}" prevent-back="{{true}}" bindback="onBack" />
+<view class="page-shell play-page ui-page {{uiPhase}}">
+  <view wx:if="{{mode === 'hub'}}" class="experience-panel">
+    <text class="eyebrow">免费体验 · 无需注册</text>
+    <text class="play-heading serif">用一次小挑战，巩固所学</text>
+    <text class="play-copy">从答题到观察，选一种方式开始。学习记录保存在当前设备。</text>
+    <view wx:if="{{summary.error}}" class="save-error">{{summary.error}}</view>
+    <view class="play-summary">
+      <view><text>{{summary.quizBest}} / 5</text><text>闯关最高分</text></view>
+      <view><text>{{summary.observationCount}} / 7</text><text>观察任务</text></view>
+      <view><text>{{summary.badgeCount}} / 6</text><text>已获徽章</text></view>
+    </view>
+    <view class="module-grid">
+      <button wx:for="{{modules}}" wx:key="mode" class="pressable module-card" data-mode="{{item.mode}}" bindtap="chooseModule" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">
+        <view class="module-top"><view class="module-icon"><app-icon name="{{item.icon}}" size="{{25}}" color="#244b3b" /></view><text>{{item.label}}</text></view>
+        <text class="module-title serif">{{item.title}}</text>
+        <text class="module-copy">{{item.copy}}</text>
+        <view class="module-link"><text>开始体验</text><app-icon name="arrow" size="{{16}}" color="#244b3b" /></view>
+      </button>
+    </view>
+    <text class="block-title serif">我的学习徽章</text>
+    <view class="badge-grid">
+      <view wx:for="{{summary.badges}}" wx:key="title" class="badge {{item.earned ? 'earned' : ''}}">
+        <app-icon name="{{item.earned ? 'check' : 'leaf'}}" size="{{21}}" color="{{item.earned ? '#244b3b' : '#68766a'}}" />
+        <text class="badge-title">{{item.title}}</text><text class="badge-hint">{{item.hint}}</text><text class="badge-status">{{item.earned ? '已获得' : '待解锁'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:elif="{{mode === 'quiz'}}" class="experience-panel">
+    <text class="play-copy">{{quizStarted && !quizResult ? '选择一个答案，查看解析后进入下一题。' : '选择主题，完成五题挑战。每题都有解析与关联课程。'}}</text>
+    <scroll-view wx:if="{{!quizStarted || quizResult}}" scroll-x="{{true}}" show-scrollbar="{{false}}" class="topic-scroll">
+      <view class="topic-row"><button wx:for="{{topics}}" wx:key="id" class="pressable chip {{topic === item.id ? 'active' : ''}}" data-topic="{{item.id}}" bindtap="chooseTopic" aria-pressed="{{topic === item.id}}" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">{{item.title}}</button></view>
+    </scroll-view>
+    <button wx:if="{{!quizStarted}}" class="pressable primary-button" bindtap="startQuiz" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">开始五题挑战</button>
+    <view wx:elif="{{quizResult}}" class="quiz-result">
+      <text class="result-caption">本轮成绩</text><text class="result-score serif">{{quizResult.score}} / 5</text>
+      <text class="play-copy">{{quizResult.score >= 4 ? '掌握得不错，试试其他主题吧。' : '查看下面的解析，回到课程巩固后再挑战。'}}</text>
+      <text class="saved-label">{{quizSaved ? '成绩已保存在当前设备' : '成绩尚未保存'}}</text>
+      <button wx:if="{{quizError}}" class="pressable save-error" bindtap="saveQuiz" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">{{quizError}} · 重试保存</button>
+      <button class="pressable primary-button" bindtap="startQuiz" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">再来一轮</button>
+      <text class="block-title serif">逐题回顾</text>
+      <view wx:for="{{quizResult.review}}" wx:key="id" class="review-item">
+        <text class="review-status">{{item.correct ? '✓ 回答正确' : '待复习'}}</text>
+        <text class="question-title">{{index + 1}}. {{item.prompt}}</text>
+        <text class="answer-label">你的选择：{{item.options[item.selected]}}</text>
+        <text wx:if="{{!item.correct}}" class="answer-label">正确答案：{{item.options[item.answer]}}</text>
+        <text class="explanation">{{item.explanation}}</text>
+        <button class="pressable text-link" data-key="{{item.relatedKey}}" bindtap="openReference" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">查看关联课程 <app-icon name="arrow" size="{{15}}" color="#244b3b" /></button>
+      </view>
+    </view>
+    <view wx:else class="question-sheet">
+      <text class="eyebrow">第 {{quizIndex + 1}} / 5 题</text>
+      <view class="question-progress"><view class="question-progress-fill" style="width: {{(quizIndex + 1) * 20}}%;" /></view>
+      <text class="question-title serif">{{question.prompt}}</text>
+      <button wx:for="{{question.options}}" wx:key="index" class="pressable answer-option {{answered && index === question.answer ? 'answer-correct' : ''}} {{answered && selected === index && index !== question.answer ? 'answer-wrong' : ''}}" data-index="{{index}}" bindtap="chooseAnswer" disabled="{{answered}}" aria-pressed="{{selected === index}}" hover-class="{{answered ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100">
+        <text>{{index + 1}}.</text><text>{{item}}</text>
+      </button>
+      <view wx:if="{{answered}}" class="explanation-panel">
+        <text class="explanation-title">{{selected === question.answer ? '✓ 回答正确' : '正确答案：' + question.options[question.answer]}}</text>
+        <text class="explanation">{{question.explanation}}</text>
+        <button class="pressable text-link" data-key="{{question.relatedKey}}" bindtap="openReference" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">查看关联课程 <app-icon name="arrow" size="{{15}}" color="#244b3b" /></button>
+      </view>
+      <button class="pressable primary-button next-question" bindtap="nextQuestion" disabled="{{!answered}}" hover-class="{{!answered ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100">{{quizIndex === 4 ? '查看成绩与解析' : '下一题'}}</button>
+    </view>
+  </view>
+
+  <view wx:elif="{{mode === 'match'}}" class="experience-panel">
+    <text class="play-copy">每次翻两张，把术语与说明配成一组。配对错误时，卡片会自动翻回。</text>
+    <view class="match-status"><text>已配对 {{matches}} / 6</text><text>尝试 {{moves}} 次</text></view>
+    <view class="match-grid">
+      <button wx:for="{{deck}}" wx:key="id" class="pressable memory-card {{item.open ? 'face-up' : ''}} {{item.matched ? 'paired' : ''}}" data-index="{{index}}" bindtap="flipCard" disabled="{{locked || item.matched}}" aria-label="{{item.open ? item.type + '：' + item.text + (item.matched ? '，已配对' : '') : '翻开第 ' + (index + 1) + ' 张卡'}}" hover-class="{{locked || item.matched ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100">
+        <block wx:if="{{item.open}}"><text class="memory-type">{{item.matched ? '✓ 已配对' : item.type}}</text><text>{{item.text}}</text></block>
+        <block wx:else><app-icon name="leaf" size="{{24}}" color="#244b3b" /><text class="memory-number">{{index + 1}}</text></block>
+      </button>
+    </view>
+    <view wx:if="{{matchDone}}" class="finished-panel">
+      <text class="block-title serif">六组全部配对完成</text>
+      <text class="play-copy">本轮用了 {{moves}} 次尝试。{{matchSaved ? '成绩已保存在当前设备。' : '成绩尚未保存。'}}</text>
+      <button wx:if="{{matchError}}" class="pressable save-error" bindtap="saveMatch" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">{{matchError}} · 重试保存</button>
+    </view>
+    <button class="pressable secondary-button" bindtap="startMatch" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">重新洗牌</button>
+  </view>
+
+  <view wx:elif="{{mode === 'observe'}}" class="experience-panel">
+    <text class="play-copy">每天一个任务，累计七次真实观察。无需连续七天，也无需采摘。</text>
+    <text wx:if="{{todayDone}}" class="saved-label">今天的任务已记录，可修改同一任务。</text>
+    <view class="mission-selector-heading"><text>观察任务</text><text>左右滑动选择</text></view>
+    <scroll-view class="mission-scroll" scroll-x="{{true}}" show-scrollbar="{{false}}" aria-label="七个观察任务，左右滑动选择"><view class="mission-list">
+      <button wx:for="{{missions}}" wx:key="id" class="pressable mission-chip {{missionId === item.id ? 'selected-mission' : ''}}" data-id="{{item.id}}" bindtap="chooseMission" aria-pressed="{{missionId === item.id}}" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><text>{{index + 1}}. {{item.title}}</text><text>{{item.completed ? '✓ ' + item.date : '待观察'}}</text></button>
+    </view></scroll-view>
+    <view wx:if="{{mission}}" class="mission-sheet">
+      <text class="block-title serif">{{mission.title}}</text><text class="play-copy">{{mission.instruction}}</text>
+      <text class="prompt-label">记录提示</text><text class="mission-prompt" selectable="{{true}}">{{mission.prompt}}</text>
+      <textarea class="observation-input" value="{{observationText}}" disabled="{{observationReadOnly}}" maxlength="500" placeholder="写下实际发现、观察条件和待确认的问题，20–500 字。" bindinput="observationInput" aria-label="填写观察记录，20至500字" auto-height="{{true}}" show-confirm-bar="{{false}}" />
+      <text class="word-count">{{observationText.length}} / 500</text>
+      <text wx:if="{{observationError}}" class="save-error">{{observationError}}</text>
+      <button class="pressable primary-button" bindtap="saveObservation" disabled="{{observationReadOnly}}" hover-class="{{observationReadOnly ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100">{{observationReadOnly ? '历史记录 · 仅可查看' : (observationSaved ? '更新本次记录' : '保存观察记录')}}</button>
+      <view class="mission-actions"><button class="pressable secondary-button" data-key="{{mission.relatedKey}}" bindtap="openReference" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">参考课程</button><button class="pressable secondary-button" bindtap="writeObservation" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">整理成笔记</button></view>
+      <text class="local-hint">任务记录保存在当前设备。整理成笔记时默认私密，可选择公开。</text>
+    </view>
+  </view>
+
+  <view wx:elif="{{mode === 'daily'}}" class="experience-panel">
+    <text class="play-copy">每天一张具体的观察提示，同一天打开始终是同一张。</text>
+    <button wx:if="{{!dailyOpened}}" class="pressable daily-closed" bindtap="openDaily" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><view class="daily-icon"><app-icon name="leaf" size="{{42}}" color="#244b3b" /></view><text class="daily-title serif">今日草木灵感</text><text class="daily-open-label">点击翻开今日提示</text></button>
+    <view wx:else class="daily-open">
+      <text class="eyebrow">今日灵感</text><text class="daily-title serif">{{dailyCard.title}}</text><text class="daily-task">{{dailyCard.task}}</text>
+      <button class="pressable secondary-button" data-key="{{dailyCard.relatedKey}}" bindtap="openReference" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">查看参考内容</button>
+      <button class="pressable primary-button" bindtap="writeInspiration" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">记录今天的发现</button>
+    </view>
+    <text wx:if="{{dailyError}}" class="save-error">{{dailyError}}</text>
+    <text class="local-hint">已在 {{summary.dailyCount}} 个日期打开灵感卡。徽章记录你的学习足迹。</text>
+  </view>
+  <button wx:if="{{mode !== 'hub'}}" class="pressable text-link back-hub" bindtap="onBack" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100"><app-icon name="arrow" size="{{16}}" color="#244b3b" /><text>返回学习游戏</text></button>
+</view>

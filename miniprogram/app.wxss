@@ -1,0 +1,30 @@
+/* 百草源：纯色纸面、细分隔线与统一的草木绿。 */
+page { background: #f6f7f4; color: #263b30; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 28rpx; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+view, text, button, input, textarea, scroll-view { box-sizing: border-box; }
+button { margin: 0; padding: 0; background: transparent; color: inherit; font-size: inherit; line-height: inherit; border-radius: 0; }
+button::after { border: 0; }
+button:not([size="mini"]) { width: auto; margin-left: 0; margin-right: 0; }
+button[disabled] { opacity: .45; }
+image { display: block; }
+.page-shell { padding: 32rpx 36rpx 56rpx; }
+.serif { font-family: "Songti SC", "STSong", "SimSun", "FangSong", serif; }
+.eyebrow { color: #68766a; font-size: 22rpx; line-height: 1.5; }
+.muted { color: #68766a; }
+.section-heading { color: #263b30; font-size: 32rpx; font-weight: 600; line-height: 1.45; }
+.text-link { display: flex; align-items: center; gap: 8rpx; min-height: 72rpx; color: #244b3b; font-size: 24rpx; }
+.primary-button, .secondary-button, .glass-button { display: flex; align-items: center; justify-content: center; min-height: 88rpx; padding: 22rpx 28rpx; border: 1rpx solid transparent; border-radius: 12rpx; font-size: 27rpx; font-weight: 500; line-height: 1.5; }
+.primary-button { background: #244b3b; color: #fff; }
+.secondary-button, .glass-button { background: #fff; color: #244b3b; border-color: #dce3d9; }
+.glass-panel { background: #fff; border: 1rpx solid #e3e7e1; border-radius: 12rpx; }
+.primary-button app-icon, .secondary-button app-icon { margin-left: 12rpx; }
+.chip { min-height: 72rpx; padding: 15rpx 24rpx; border: 1rpx solid #e3e7e1; border-radius: 8rpx; background: #fff; color: #68766a; font-size: 25rpx; white-space: nowrap; }
+.chip.active { background: #244b3b; border-color: #244b3b; color: #fff; }
+.empty-state { padding: 56rpx 28rpx; border: 1rpx solid #e3e7e1; border-radius: 12rpx; background: #fff; color: #68766a; text-align: center; }
+.empty-state .primary-button, .empty-state .secondary-button { margin-top: 24rpx; }
+.demo-hint { margin-bottom: 24rpx; padding: 20rpx 24rpx; border-left: 4rpx solid #a8b8a3; background: #edf1eb; color: #526553; font-size: 23rpx; line-height: 1.7; }
+button, .pressable { transition: opacity 140ms ease-out, background-color 140ms ease-out; }
+.press-feedback { opacity: .65; }
+button[disabled].press-feedback { opacity: .45; }
+.ui-page.ui-enter { animation: page-arrive 180ms ease-out both; }
+@keyframes page-arrive { from { opacity: .45; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .ui-page.ui-enter { animation: none; } button, .pressable { transition: none; } }

@@ -1,0 +1,14 @@
+<view wx:if="{{item}}" class="card pressable {{item.archive ? 'archive-card' : ''}} {{item.kind === 'note' ? 'note-card' : ''}}" bindtap="open" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100" aria-role="button" aria-label="打开{{item.title}}">
+  <view class="image-wrap">
+    <image wx:if="{{!failed}}" class="card-image" src="{{item.image}}" mode="aspectFill" lazy-load binderror="onImageError" aria-label="{{item.title}}" />
+    <view wx:else class="image-fallback"><app-icon name="book" size="{{34}}"/><text>{{item.archive ? '本草纲目' : '本草观察'}}</text></view>
+    <view class="kind-label">{{kindLabel}}</view>
+    <button size="mini" class="favorite-button {{favorite ? 'is-favorite' : ''}}" catchtap="favorite" hover-class="press-feedback" hover-stop-propagation="{{true}}" hover-start-time="0" hover-stay-time="100" aria-pressed="{{favorite}}" aria-label="{{favorite ? '取消收藏' : '收藏'}}{{item.title}}"><app-icon name="heart" size="{{18}}" color="{{favorite ? '#ffffff' : '#244b3b'}}" /></button>
+  </view>
+  <view class="card-copy">
+    <view class="card-meta"><text>{{item.category}}</text><text wx:if="{{item.minutes}}">约 {{item.minutes}} 分钟 · {{item.chapters.length}} 节</text></view>
+    <view class="card-title {{item.archive ? 'serif' : ''}}">{{item.title}}</view>
+    <view class="card-description">{{item.description}}</view>
+    <view class="card-footer"><text>{{item.kind === 'course' ? (item.progress.finished ? '重读课程' : (item.progress.started ? '继续学习' : '开始学习')) : (item.kind === 'note' ? '阅读笔记' : (item.kind === 'route' ? '查看观察任务' : '阅读本草档案'))}}</text><app-icon name="arrow" size="{{18}}" /></view>
+  </view>
+</view>

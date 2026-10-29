@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "写笔记",
+  "usingComponents": {
+    "page-header": "/components/page-header/index",
+    "app-icon": "/components/app-icon/index"
+  }
+}

@@ -1,0 +1,18 @@
+<page-header title="编辑个人资料" back="{{true}}" prevent-back="{{true}}" bindback="onBack" />
+<view class="page-shell edit-profile-page ui-page {{uiPhase}}">
+  <view wx:if="{{!authenticated}}" class="empty-state"><text class="empty-title serif">登录后，留下自己的名字</text><text class="empty-copy">设置用户名、个性标签和个人简介。</text><button class="primary-button" bindtap="openAuth" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">去登录</button></view>
+  <block wx:else>
+    <view class="avatar-editor"><button wx:if="{{cloudAvatarEnabled}}" class="avatar-choice" open-type="chooseAvatar" bindchooseavatar="chooseAvatar" disabled="{{saving}}" aria-label="选择头像" hover-class="{{saving ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100"><image wx:if="{{(pendingAvatar || avatarUrl) && !avatarFailed}}" src="{{pendingAvatar || avatarUrl}}" class="avatar-image" mode="aspectFill" binderror="onAvatarError" /><text wx:else class="avatar-letter serif">{{avatarText}}</text></button><view wx:else class="avatar-choice"><text class="avatar-letter serif">{{avatarText}}</text></view><text class="avatar-caption">{{demoMode ? '点击头像，选择本机图片' : '使用用户名首字作为头像'}}</text><button wx:if="{{pendingAvatar || avatarUrl}}" class="avatar-reset" bindtap="resetAvatar" disabled="{{saving}}" hover-class="{{saving ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100">使用默认文字头像</button><text wx:else class="avatar-hint">默认使用用户名中的第一个汉字或字母</text></view>
+    <view class="form-sheet">
+      <view class="form-field"><view class="field-heading"><text class="field-label">用户名</text><text class="field-counter">{{username.length}} / 20</text></view><input class="field-input" value="{{username}}" data-field="username" bindinput="onInput" placeholder="其他用户看到的名字" maxlength="20" disabled="{{saving}}"  placeholder-style="color: #7b887a;" /></view>
+      <view class="form-field"><text class="field-label">个性标签</text><input class="field-input" value="{{tagsText}}" data-field="tagsText" bindinput="onInput" placeholder="如：本草爱好者，校园观察员" maxlength="100" disabled="{{saving}}"  placeholder-style="color: #7b887a;" /><text class="field-hint">用逗号分隔，最多 6 个，每个最多 12 字。</text></view>
+      <view class="form-field"><view class="field-heading"><text class="field-label">个人简介</text><text class="field-counter">{{bio.length}} / 200</text></view><textarea class="bio-input" value="{{bio}}" data-field="bio" bindinput="onInput" placeholder="说说你和草木的故事…" maxlength="200" show-confirm-bar="{{false}}" disabled="{{saving}}"  placeholder-style="color: #7b887a;" /></view>
+    </view>
+    <view wx:if="{{!demoMode}}" class="account-sheet"><text class="account-heading">登录账号</text><view class="account-row"><text>学号</text><text>{{maskedStudentId}}</text></view><view class="account-row"><text>手机号</text><text>{{maskedPhone}}</text></view><text class="account-caption">学号和手机号仅用于账号登录，不会展示在公开资料中。</text></view>
+    <view wx:else class="account-sheet"><text class="account-heading">本机体验账号</text><text class="account-caption">无需学号和手机号。资料修改保存在当前设备，可在本机体验笔记中查看。</text></view>
+    <text wx:if="{{error}}" class="form-error" role="alert">{{error}}</text>
+    <button wx:if="{{sessionExpired}}" class="secondary-button relogin-button" bindtap="openAuth" hover-class="press-feedback" hover-start-time="0" hover-stay-time="100">重新登录，继续保存</button>
+    <button class="primary-button save-button" bindtap="save" loading="{{saving}}" disabled="{{saving}}" hover-class="{{saving ? 'none' : 'press-feedback'}}" hover-start-time="0" hover-stay-time="100">{{saving ? '正在保存…' : '保存资料'}}</button>
+    <text class="save-caption">{{demoMode ? '体验资料仅保存在当前设备。' : '文字头像、用户名、标签和简介会随公开笔记展示。'}}</text>
+  </block>
+</view>

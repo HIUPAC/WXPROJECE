@@ -1,0 +1,12 @@
+.legal-page { padding-top: 20rpx; }
+.legal-tabs { display: flex; margin-bottom: 30rpx; padding: 0; gap: 30rpx; background: transparent; border-radius: 0; border-bottom: 1rpx solid #e3e7e1; }
+.legal-tab { flex: 1; color: #68766a; font-size: 26rpx; padding: 18rpx 0; border-radius: 0; border-bottom: 3rpx solid transparent; margin-bottom: -1rpx; }
+.legal-tab.active { color: #244b3b; font-weight: 600; background: transparent; border-bottom-color: #244b3b; }
+.legal-title { display: block; color: #263b30; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 38rpx; font-weight: 600; }
+.legal-date { display: block; margin-top: 12rpx; font-size: 22rpx; color: #68766a; }
+.legal-intro { margin: 24rpx 0; background: #edf1eb; padding: 22rpx; border-radius: 12rpx; font-size: 24rpx; color: #35624c; }
+.legal-section { padding: 28rpx 0; background: transparent; border-radius: 0; border-top: 1rpx solid #e3e7e1; margin-top: 0; }
+.legal-heading { display: block; font-size: 29rpx; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; color: #263b30; }
+.legal-copy { display: block; margin-top: 14rpx; font-size: 25rpx; line-height: 1.95; color: #68766a; }
+.privacy-button { margin-top: 20rpx; font-size: 24rpx; }
+.contact-copy { text-align: left; margin-top: 18rpx; color: #244b3b; font-size: 25rpx; overflow-wrap: anywhere; }
